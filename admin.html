@@ -926,48 +926,89 @@
         modal.classList.add("open");
     }
 
-    document.getElementById("respond-send-btn").addEventListener("click", async () => {
-        const id = document.getElementById("respond-app-id").value;
-        const action = document.getElementById("respond-action").value;
-        const email = document.getElementById("respond-to-email").value;
-        const subject = document.getElementById("respond-subject").value;
-        const body = document.getElementById("respond-body").value;
-        const fb = document.getElementById("respond-feedback");
-        const btn = document.getElementById("respond-send-btn");
-        btn.disabled = true;
-        btn.textContent = "Sending…";
+document.getElementById("respond-send-btn").addEventListener("click", async () => {
+    const id       = document.getElementById("respond-app-id").value;
+    const action   = document.getElementById("respond-action").value;
+    const email    = document.getElementById("respond-to-email").value;
+    const name     = email.split("@")[0]; // fallback username
+    const subject  = document.getElementById("respond-subject").value;
+    const body     = document.getElementById("respond-body").value;
+    const fb       = document.getElementById("respond-feedback");
+    const btn      = document.getElementById("respond-send-btn");
 
-        try {
-            const newStatus = action === "accept" ? "accepted" : action === "reject" ? "rejected" : "revision";
-            const templateId = action === "accept" ? ejsConfig.welcomeTemplateId :
-                               action === "reject" ? ejsConfig.rejectTemplateId : ejsConfig.revisionTemplateId;
+    btn.disabled = true;
+    btn.textContent = "Sending…";
 
-            // Send via EmailJS
-            if (ejsConfig.publicKey && ejsConfig.serviceId && templateId) {
-                await emailjs.send(ejsConfig.serviceId, templateId, {
-                    to_email: email, subject: subject, message: body
-                });
-            }
+    try {
+        const newStatus = action === "accept" ? "accepted"
+                        : action === "reject" ? "rejected" : "revision";
 
-            // Update Firestore
-            await updateDoc(doc(db, "applications", id), { status: newStatus });
+        const templateId = action === "accept" ? ejsConfig.welcomeTemplateId
+                         : action === "reject"  ? ejsConfig.rejectTemplateId
+                         : ejsConfig.revisionTemplateId;
 
-            fb.style.color = "var(--green)";
-            fb.textContent = "Email sent and status updated ✓";
-            fb.style.display = "block";
-            setTimeout(() => {
-                document.getElementById("respond-modal").classList.remove("open");
-                loadApplications();
-            }, 1500);
-        } catch(e) {
-            fb.style.color = "var(--red)";
-            fb.textContent = "Error: " + e.message;
-            fb.style.display = "block";
-        } finally {
-            btn.disabled = false;
-            btn.textContent = "Send & Update Status";
+        // 1. Send email via EmailJS
+        if (ejsConfig.publicKey && ejsConfig.serviceId && templateId) {
+            await emailjs.send(ejsConfig.serviceId, templateId, {
+                to_email: email, subject: subject, message: body
+            });
         }
-    });
+
+        // 2. If accepting — create WordPress contributor account
+        if (action === "accept") {
+            const wpSnap = await getDoc(doc(db, "settings", "wordpress"));
+            if (wpSnap.exists()) {
+                const wp = wpSnap.data();
+                const credentials = btoa(`${wp.username}:${wp.appPassword}`);
+
+                // Generate a username from the email
+                const wpUsername = email.split("@")[0].replace(/[^a-zA-Z0-9]/g, "") + Math.floor(Math.random() * 100);
+
+                const wpRes = await fetch(`${wp.siteUrl}/wp-json/wp/v2/users`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Basic ${credentials}`
+                    },
+                    body: JSON.stringify({
+                        username: wpUsername,
+                        email:    email,
+                        roles:    [wp.role || "contributor"],
+                        password: crypto.randomUUID(), // strong random password
+                        send_user_notification: true   // WP sends its own welcome email
+                    })
+                });
+
+                if (!wpRes.ok) {
+                    const err = await wpRes.json();
+                    throw new Error("WordPress error: " + (err.message || wpRes.status));
+                }
+            }
+        }
+
+        // 3. Update Firestore status
+        await updateDoc(doc(db, "applications", id), { status: newStatus });
+
+        fb.style.color = "var(--green)";
+        fb.textContent = action === "accept"
+            ? "Email sent + WordPress contributor account created ✓"
+            : "Email sent and status updated ✓";
+        fb.style.display = "block";
+
+        setTimeout(() => {
+            document.getElementById("respond-modal").classList.remove("open");
+            loadApplications();
+        }, 2000);
+
+    } catch(e) {
+        fb.style.color = "var(--red)";
+        fb.textContent = "Error: " + e.message;
+        fb.style.display = "block";
+    } finally {
+        btn.disabled = false;
+        btn.textContent = "Send & Update Status";
+    }
+});
     document.getElementById("respond-modal-close").addEventListener("click", () => document.getElementById("respond-modal").classList.remove("open"));
     document.getElementById("respond-cancel-btn").addEventListener("click", () => document.getElementById("respond-modal").classList.remove("open"));
 
