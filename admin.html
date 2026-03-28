@@ -178,6 +178,27 @@
 
         /* ── RICH TEXT HINT ── */
         .hint { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+        /* ── DRAG & DROP ── */
+        .drag-handle { cursor: grab; color: var(--text-muted); margin-right: 0.5rem; user-select: none; font-size: 1rem; }
+        .drag-handle:active { cursor: grabbing; }
+        .section-block { background: var(--surface2); border: 1px solid var(--border); padding: 0.75rem 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        .section-block.dragging { opacity: 0.4; border-style: dashed; }
+        .section-block.drag-over { border-color: var(--accent); background: var(--accent-dim); }
+        .section-block-type { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); background: var(--accent-dim); padding: 2px 8px; flex-shrink: 0; }
+        .section-block-label { flex: 1; font-size: 0.85rem; color: var(--text); }
+        .section-block-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+        .page-row { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+        .page-row:last-child { border-bottom: none; }
+        .page-row-info { flex: 1; }
+        .page-row-name { font-size: 0.9rem; }
+        .page-row-slug { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+        .page-row-actions { display: flex; gap: 0.5rem; }
+        .type-picker { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-bottom: 1.25rem; }
+        .type-btn { padding: 0.6rem; text-align: center; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; border: 1px solid var(--border); color: var(--text-muted); background: none; font-family: var(--font); transition: all 0.15s; }
+        .type-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .section-edit-fields { background: var(--surface); border: 1px solid var(--border); padding: 1rem; margin-top: 0.5rem; margin-bottom: 0.75rem; display: none; }
+        .section-edit-fields.open { display: block; }
     </style>
 </head>
 <body>
@@ -217,6 +238,10 @@
     <div class="layout">
         <!-- SIDEBAR -->
         <nav class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-label">Pages</div>
+                <button class="sidebar-item" data-panel="pages">All Pages</button>
+            </div>
             <div class="sidebar-section">
                 <div class="sidebar-label">Applications</div>
                 <button class="sidebar-item active" data-panel="applications">Applications <span class="badge" id="pending-badge" style="display:none">0</span></button>
@@ -453,7 +478,7 @@
             <div class="panel" id="panel-email-config">
                 <div class="panel-header">
                     <h2>EmailJS Configuration</h2>
-                    <p>Connect EmailJS so emails are sent from editor@ugtraveller.com. <a href="https://www.emailjs.com" target="_blank" style="color:var(--accent);">Get keys at emailjs.com →</a></p>
+                    <p>Connect EmailJS so emails are sent from <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71141518051e0331041605031007141d1d14035f121e1c">[email&#160;protected]</a>. <a href="https://www.emailjs.com" target="_blank" style="color:var(--accent);">Get keys at emailjs.com →</a></p>
                 </div>
                 <div class="card">
                   <div class="field">
@@ -485,6 +510,55 @@
                 </div>
             </div>
 
+
+            <!-- ── PAGES ── -->
+            <div class="panel" id="panel-pages">
+                <div class="panel-header">
+                    <h2>Pages</h2>
+                    <p>Create and manage SPA pages. Each page has its own sections you can add and reorder.</p>
+                </div>
+                <div id="pages-list-view">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">All Pages</span>
+                            <button class="btn btn-primary btn-sm" id="new-page-btn">+ New Page</button>
+                        </div>
+                        <div id="pages-list"><div class="empty-state">No pages yet.</div></div>
+                    </div>
+                </div>
+                <div id="page-editor-view" style="display:none;">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                        <button class="btn btn-ghost btn-sm" id="back-to-pages">← All Pages</button>
+                        <span id="page-editor-breadcrumb" style="color:var(--text-muted);font-size:0.8rem;"></span>
+                    </div>
+                    <div class="card" style="margin-bottom:1.5rem;">
+                        <div class="field-row">
+                            <div class="field"><label>Page Name</label><input type="text" id="pe-name" placeholder="e.g. About"></div>
+                            <div class="field"><label>Slug (URL)</label><input type="text" id="pe-slug" placeholder="e.g. about"><p class="hint">URL: index.html?page=about</p></div>
+                        </div>
+                        <input type="hidden" id="pe-id">
+                        <button class="btn btn-primary btn-sm" id="save-page-meta">Save Page Info</button>
+                        <span class="save-feedback" id="save-page-meta-fb">Saved ✓</span>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Sections</span></div>
+                        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;">Drag ☰ to reorder. Click Edit to change content.</p>
+                        <div id="pe-sections-list" style="min-height:60px;"></div>
+                        <hr class="divider">
+                        <p style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.75rem;">Add a section</p>
+                        <div class="type-picker">
+                            <button class="type-btn" data-type="intro">Intro</button>
+                            <button class="type-btn" data-type="text_block">Text Block</button>
+                            <button class="type-btn" data-type="articles">Articles</button>
+                            <button class="type-btn" data-type="translations">Translations</button>
+                            <button class="type-btn" data-type="apply">Apply Form</button>
+                            <button class="type-btn" data-type="contacts">Contacts</button>
+                        </div>
+                        <button class="btn btn-primary" id="save-page-sections">Save Section Order</button>
+                        <span class="save-feedback" id="save-sections-fb">Saved ✓</span>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </div>
@@ -622,7 +696,7 @@
 <!-- ══════════════════════════════════════
      FIREBASE + APP JS
 ══════════════════════════════════════ -->
-<script type="module">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import {
         getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
@@ -1156,7 +1230,294 @@
     });
     document.getElementById("translation-modal-close").addEventListener("click", () => document.getElementById("translation-modal").classList.remove("open"));
     document.getElementById("translation-cancel-btn").addEventListener("click", () => document.getElementById("translation-modal").classList.remove("open"));
-</script>
 
+    // ══════════════════════════════════════════════════════════════════
+    // PAGES — create, edit, delete, section builder, drag-to-reorder
+    // ══════════════════════════════════════════════════════════════════
+
+    let currentPageId   = null;   // slug of page being edited
+    let currentSections = [];     // sections array for current page
+    let dragSrc         = null;   // drag source element
+
+    // ── VIEW SWITCHING ────────────────────────────────────────────────
+    function showPagesList() {
+        document.getElementById("pages-list-view").style.display  = "block";
+        document.getElementById("page-editor-view").style.display = "none";
+        currentPageId = null;
+        loadPagesList();
+    }
+
+    function showPageEditor(slug, name) {
+        document.getElementById("pages-list-view").style.display  = "none";
+        document.getElementById("page-editor-view").style.display = "block";
+        document.getElementById("page-editor-breadcrumb").textContent = "Editing: " + (name || slug);
+        document.getElementById("pe-id").value   = slug;
+        document.getElementById("pe-name").value = name || "";
+        document.getElementById("pe-slug").value = slug;
+        currentPageId = slug;
+        loadPageSections(slug);
+    }
+
+    document.getElementById("back-to-pages").addEventListener("click", showPagesList);
+
+    // ── LOAD PAGES LIST ───────────────────────────────────────────────
+    async function loadPagesList() {
+        const snap = await getDocs(collection(db, "pages"));
+        const container = document.getElementById("pages-list");
+        if (snap.empty) {
+            container.innerHTML = `<div class="empty-state">No pages yet. Click "+ New Page" to create one.</div>`;
+            return;
+        }
+        container.innerHTML = "";
+        snap.forEach(d => {
+            const p = d.data();
+            const row = document.createElement("div");
+            row.className = "page-row";
+            row.innerHTML = `
+                <div class="page-row-info">
+                    <div class="page-row-name">${p.name || d.id}</div>
+                    <div class="page-row-slug">?page=${d.id}</div>
+                </div>
+                <div class="page-row-actions">
+                    <button class="btn btn-ghost btn-sm" onclick="editPage('${d.id}','${(p.name||'').replace(/'/g,"\\'")}')">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deletePage('${d.id}')">Delete</button>
+                </div>`;
+            container.appendChild(row);
+        });
+    }
+
+    window.editPage = (slug, name) => showPageEditor(slug, name);
+
+    window.deletePage = async (slug) => {
+        if (!confirm(`Delete page "${slug}"? This cannot be undone.`)) return;
+        await deleteDoc(doc(db, "pages", slug));
+        loadPagesList();
+    };
+
+    // ── NEW PAGE ──────────────────────────────────────────────────────
+    document.getElementById("new-page-btn").addEventListener("click", () => {
+        document.getElementById("pe-id").value   = "";
+        document.getElementById("pe-name").value = "";
+        document.getElementById("pe-slug").value = "";
+        document.getElementById("pages-list-view").style.display  = "none";
+        document.getElementById("page-editor-view").style.display = "block";
+        document.getElementById("page-editor-breadcrumb").textContent = "New Page";
+        currentPageId    = null;
+        currentSections  = [];
+        renderSectionBlocks();
+    });
+
+    // Auto-generate slug from name
+    document.getElementById("pe-name").addEventListener("input", () => {
+        if (!currentPageId) {
+            document.getElementById("pe-slug").value = document.getElementById("pe-name").value
+                .toLowerCase().trim().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+        }
+    });
+
+    // ── SAVE PAGE META ────────────────────────────────────────────────
+    document.getElementById("save-page-meta").addEventListener("click", async () => {
+        const name = document.getElementById("pe-name").value.trim();
+        const slug = document.getElementById("pe-slug").value.trim().toLowerCase().replace(/\s+/g,"-").replace(/[^a-z0-9-]/g,"");
+        if (!slug) { alert("Slug is required."); return; }
+        const isNew = !currentPageId;
+        // Get existing sections if editing
+        let sections = currentSections;
+        if (!isNew) {
+            const snap = await getDoc(doc(db, "pages", currentPageId));
+            sections = snap.exists() ? (snap.data().sections || []) : [];
+        }
+        // If slug changed, delete old doc
+        if (!isNew && currentPageId !== slug) {
+            await deleteDoc(doc(db, "pages", currentPageId));
+        }
+        await setDoc(doc(db, "pages", slug), { name, slug, sections });
+        currentPageId = slug;
+        document.getElementById("pe-id").value = slug;
+        document.getElementById("page-editor-breadcrumb").textContent = "Editing: " + name;
+        showFeedback("save-page-meta-fb");
+    });
+
+    // ── LOAD PAGE SECTIONS ────────────────────────────────────────────
+    async function loadPageSections(slug) {
+        const snap = await getDoc(doc(db, "pages", slug));
+        currentSections = snap.exists() ? (snap.data().sections || []) : [];
+        currentSections.sort((a, b) => (a.order||0) - (b.order||0));
+        renderSectionBlocks();
+    }
+
+    // ── RENDER SECTION BLOCKS (drag list) ────────────────────────────
+    function renderSectionBlocks() {
+        const container = document.getElementById("pe-sections-list");
+        if (!currentSections.length) {
+            container.innerHTML = `<div class="empty-state" style="padding:1.5rem;">No sections yet. Add one below.</div>`;
+            return;
+        }
+        container.innerHTML = "";
+        currentSections.forEach((sec, idx) => {
+            const block = document.createElement("div");
+            block.className  = "section-block";
+            block.draggable  = true;
+            block.dataset.idx = idx;
+            block.innerHTML = `
+                <span class="drag-handle" title="Drag to reorder">☰</span>
+                <span class="section-block-type">${sec.type.replace("_"," ")}</span>
+                <span class="section-block-label">${getSectionLabel(sec)}</span>
+                <div class="section-block-actions">
+                    <button class="btn btn-ghost btn-sm" onclick="openSectionEdit(${idx})">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="removeSection(${idx})">✕</button>
+                </div>`;
+            // Drag events
+            block.addEventListener("dragstart", e => {
+                dragSrc = block;
+                block.classList.add("dragging");
+                e.dataTransfer.effectAllowed = "move";
+            });
+            block.addEventListener("dragend", () => {
+                block.classList.remove("dragging");
+                container.querySelectorAll(".section-block").forEach(b => b.classList.remove("drag-over"));
+            });
+            block.addEventListener("dragover", e => {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = "move";
+                container.querySelectorAll(".section-block").forEach(b => b.classList.remove("drag-over"));
+                if (block !== dragSrc) block.classList.add("drag-over");
+            });
+            block.addEventListener("drop", e => {
+                e.preventDefault();
+                if (!dragSrc || dragSrc === block) return;
+                const fromIdx = parseInt(dragSrc.dataset.idx);
+                const toIdx   = parseInt(block.dataset.idx);
+                const moved = currentSections.splice(fromIdx, 1)[0];
+                currentSections.splice(toIdx, 0, moved);
+                currentSections.forEach((s, i) => s.order = i);
+                renderSectionBlocks();
+            });
+            container.appendChild(block);
+        });
+    }
+
+    function getSectionLabel(sec) {
+        switch (sec.type) {
+            case "intro":        return sec.html ? sec.html.replace(/<[^>]+>/g,"").slice(0,50) + "…" : "(empty)";
+            case "text_block":   return sec.title || "(no title)";
+            case "articles":     return sec.title || "Articles";
+            case "translations": return sec.title || "Translations";
+            case "apply":        return sec.title || "Write for Us";
+            case "contacts":     return "Contacts";
+            default:             return sec.type;
+        }
+    }
+
+    // ── ADD SECTION ───────────────────────────────────────────────────
+    document.querySelectorAll(".type-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const type = btn.dataset.type;
+            const newSec = { type, id: "sec-" + Date.now(), order: currentSections.length };
+            // Set defaults
+            if (type === "text_block")   { newSec.title = ""; newSec.body = ""; }
+            if (type === "intro")        { newSec.html = ""; }
+            if (type === "articles")     { newSec.title = "Articles"; }
+            if (type === "translations") { newSec.title = "Translations"; }
+            if (type === "apply")        { newSec.title = "Write for Us"; newSec.introHtml = ""; }
+            if (type === "contacts")     { newSec.email = ""; newSec.links = []; newSec.profileImage = ""; }
+            currentSections.push(newSec);
+            renderSectionBlocks();
+            // Auto-open edit for the new section
+            openSectionEdit(currentSections.length - 1);
+        });
+    });
+
+    // ── REMOVE SECTION ────────────────────────────────────────────────
+    window.removeSection = (idx) => {
+        if (!confirm("Remove this section?")) return;
+        currentSections.splice(idx, 1);
+        currentSections.forEach((s, i) => s.order = i);
+        renderSectionBlocks();
+    };
+
+    // ── EDIT SECTION (inline fields) ─────────────────────────────────
+    window.openSectionEdit = (idx) => {
+        // Remove any existing edit forms
+        document.querySelectorAll(".section-edit-fields").forEach(f => f.remove());
+
+        const sec   = currentSections[idx];
+        const block = document.querySelector(`.section-block[data-idx="${idx}"]`);
+        if (!block) return;
+
+        const form = document.createElement("div");
+        form.className = "section-edit-fields open";
+
+        let fields = "";
+        switch (sec.type) {
+            case "intro":
+                fields = `<div class="field"><label>Intro HTML</label>
+                    <textarea class="se-field" data-key="html" rows="5">${sec.html||""}</textarea>
+                    <p class="hint">You can use &lt;a href="#section"&gt;links&lt;/a&gt;</p></div>`;
+                break;
+            case "text_block":
+                fields = `<div class="field"><label>Title (left column)</label>
+                    <input type="text" class="se-field" data-key="title" value="${sec.title||""}"></div>
+                    <div class="field"><label>Body (right column)</label>
+                    <textarea class="se-field" data-key="body" rows="6">${sec.body||""}</textarea></div>`;
+                break;
+            case "articles":
+            case "translations":
+                fields = `<div class="field"><label>Section Title</label>
+                    <input type="text" class="se-field" data-key="title" value="${sec.title||""}"></div>`;
+                break;
+            case "apply":
+                fields = `<div class="field"><label>Section Title</label>
+                    <input type="text" class="se-field" data-key="title" value="${sec.title||""}"></div>
+                    <div class="field"><label>Intro HTML (above form)</label>
+                    <textarea class="se-field" data-key="introHtml" rows="4">${sec.introHtml||""}</textarea></div>`;
+                break;
+            case "contacts":
+                fields = `<div class="field"><label>Contact Email</label>
+                    <input type="email" class="se-field" data-key="email" value="${sec.email||""}"></div>
+                    <div class="field"><label>Profile Image URL</label>
+                    <input type="text" class="se-field" data-key="profileImage" value="${sec.profileImage||""}"></div>
+                    <div class="field"><label>Links (JSON — e.g. [{"label":"Instagram","url":"https://..."}])</label>
+                    <textarea class="se-field" data-key="links" rows="3">${JSON.stringify(sec.links||[])}</textarea></div>`;
+                break;
+        }
+
+        form.innerHTML = fields + `<div style="margin-top:0.75rem;display:flex;gap:0.5rem;">
+            <button class="btn btn-primary btn-sm se-save">Apply</button>
+            <button class="btn btn-ghost btn-sm se-close">Close</button>
+        </div>`;
+
+        block.insertAdjacentElement("afterend", form);
+
+        form.querySelector(".se-save").addEventListener("click", () => {
+            form.querySelectorAll(".se-field").forEach(input => {
+                const key = input.dataset.key;
+                let val   = input.value;
+                if (key === "links") { try { val = JSON.parse(val); } catch(e) { val = []; } }
+                currentSections[idx][key] = val;
+            });
+            renderSectionBlocks();
+        });
+        form.querySelector(".se-close").addEventListener("click", () => {
+            form.remove();
+            renderSectionBlocks();
+        });
+    };
+
+    // ── SAVE SECTION ORDER + CONTENT ─────────────────────────────────
+    document.getElementById("save-page-sections").addEventListener("click", async () => {
+        const slug = currentPageId || document.getElementById("pe-slug").value.trim();
+        if (!slug) { alert("Save page info first."); return; }
+        currentSections.forEach((s, i) => s.order = i);
+        await setDoc(doc(db, "pages", slug), { sections: currentSections }, { merge: true });
+        showFeedback("save-sections-fb");
+    });
+
+    // Load pages panel when clicked
+    document.querySelector('[data-panel="pages"]').addEventListener("click", () => {
+        showPagesList();
+    });
+
+</script>
 </body>
 </html>

@@ -512,7 +512,6 @@ body {
 
 }
 .section-filters-column input {
-    position : absolute;
     left     : -9999px;
 }
 .section-content {
@@ -559,11 +558,13 @@ body {
     letter-spacing : -0.035em;
 
     a {
-        text-decoration           : underline;
+        pointer-events: none;
+        text-decoration           : none;
         text-decoration-thickness : 2px;
         transition-property       : text-decoration-color;
 
         &:hover {
+ text-decoration           : underline;
             text-decoration-color : var(--background);
         }
     }
