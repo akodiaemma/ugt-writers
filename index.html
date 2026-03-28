@@ -82,7 +82,7 @@
         </section>
 
         <section class="section grid" id="translations">
-            <h2 class="section-title" id="translations-title">Translations</h2>
+            <h2 class="section-title" id="translations-title">Topics We Love</h2>
             <button class="section-filters-button">Filters</button>
             <div class="section-filters-container">
                 <form class="section-filters">
@@ -107,22 +107,27 @@
                             <label class="filter" for="apply-email" style="display:block;margin-bottom:0.5rem;">Email Address</label>
                             <input type="email" id="apply-email" name="email" required placeholder="your@email.com" style="width:100%;padding:0.75rem;background:transparent;border:1px solid currentColor;font-family:inherit;font-size:1rem;color:inherit;">
                         </div>
-                        <div style="margin-bottom:1.5rem;">
-                            <label class="filter" for="apply-topic" style="display:block;margin-bottom:0.5rem;">What would you like to write about?</label>
-                            <select id="apply-topic" name="topic" required style="width:100%;padding:0.75rem;background:transparent;border:1px solid currentColor;font-family:inherit;font-size:1rem;color:inherit;appearance:none;">
-                                <option value="">Select a category</option>
-                                <option value="Inspiration">Inspiration</option>
-                                <option value="Style & Culture">Style &amp; Culture</option>
-                                <option value="Food & Drinks">Food &amp; Drinks</option>
-                                <option value="Women Travelling Uganda">Women Travelling Uganda</option>
-                                <option value="Wellness & Spas">Wellness &amp; Spas</option>
-                                <option value="News & Advice">News &amp; Advice</option>
-                                <option value="Events">Events</option>
-                                <option value="Podcasts">Podcasts</option>
-                                <option value="Videos">Videos</option>
-                                <option value="Traveller's Directory">Traveller's Directory</option>
-                            </select>
-                        </div>
+                       <div style="margin-bottom:1.5rem;">
+    <label class="filter" for="apply-topic-dropdown" style="display:block;margin-bottom:0.5rem;">What would you like to write about?</label>
+    
+    <select id="apply-topic-dropdown" style="width:100%;padding:0.75rem;background:transparent;border:1px solid currentColor;font-family:inherit;font-size:1rem;color:inherit;appearance:none;cursor:pointer;">
+        <option value="" disabled selected>Select a category...</option>
+        <option value="Inspiration">Inspiration</option>
+        <option value="Style & Culture">Style &amp; Culture</option>
+        <option value="Food & Drinks">Food &amp; Drinks</option>
+        <option value="Women Travelling Uganda">Women Travelling Uganda</option>
+        <option value="Wellness & Spas">Wellness &amp; Spas</option>
+        <option value="News & Advice">News &amp; Advice</option>
+        <option value="Events">Events</option>
+        <option value="Podcasts">Podcasts</option>
+        <option value="Videos">Videos</option>
+        <option value="Traveller's Directory">Traveller's Directory</option>
+    </select>
+    
+    <div id="selected-topics-container"></div>
+    
+    <input type="hidden" id="apply-topic" name="topic">
+</div>
                         <div style="margin-bottom:1.5rem;">
                             <label class="filter" for="apply-pitch" style="display:block;margin-bottom:0.5rem;">Tell us what you'd write about</label>
                             <textarea id="apply-pitch" name="pitch" required rows="5" placeholder="Give us a brief description of the story or topic you have in mind..." style="width:100%;padding:0.75rem;background:transparent;border:1px solid currentColor;font-family:inherit;font-size:1rem;color:inherit;resize:vertical;"></textarea>
@@ -488,6 +493,48 @@ async function setupForm() {
             btn.disabled = false; btn.textContent = "Submit Application";
         }
     });
+}
+
+// ══════════════════════════════════
+// CUSTOM TAG SELECTOR LOGIC
+// ══════════════════════════════════
+const topicDropdown = document.getElementById('apply-topic-dropdown');
+const tagsContainer = document.getElementById('selected-topics-container');
+const hiddenTopicInput = document.getElementById('apply-topic');
+let selectedTopics = [];
+
+if (topicDropdown) {
+    // When a user selects an option from the dropdown
+    topicDropdown.addEventListener('change', (e) => {
+        const val = e.target.value;
+        // If it's valid and not already selected, add it
+        if (val && !selectedTopics.includes(val)) {
+            selectedTopics.push(val);
+            renderTags();
+        }
+        // Reset the dropdown back to "Select a category..."
+        topicDropdown.selectedIndex = 0;
+    });
+
+    // When a user clicks the 'X' on a tag
+    tagsContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('topic-tag-remove')) {
+            const valToRemove = e.target.dataset.value;
+            // Remove it from the array
+            selectedTopics = selectedTopics.filter(t => t !== valToRemove);
+            renderTags();
+        }
+    });
+}
+
+// Draw the tags on the screen and update the hidden input
+function renderTags() {
+    tagsContainer.innerHTML = selectedTopics.map(topic => 
+        `<span class="topic-tag">${topic} <span class="topic-tag-remove" data-value="${topic}">✕</span></span>`
+    ).join('');
+    
+    // Update the hidden input with a clean, comma-separated string for Firebase
+    hiddenTopicInput.value = selectedTopics.join(', ');
 }
 
 // ── INIT ─────────────────────────────────────────────────────────────
