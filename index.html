@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" id="home" data-scheme="white">
 <head>
@@ -9,46 +8,43 @@
     <meta name="theme-color" content="#fff">
     
     <!-- Preload the fonts -->
-    <link rel="preload" href="https://gmaurovich.com/assets/css/fonts/font.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/NHaasGroteskDSPro-65Md.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
     <!-- Robots -->
     <meta name="robots" content="index, follow">
         
     <!-- Social Images -->
-    <meta content="https://gmaurovich.com/media/site/ec112a8887-1739956981/social.jpg" itemprop="image">
-    <meta content="https://gmaurovich.com/media/site/ec112a8887-1739956981/social.jpg" name="twitter:image">
-    <meta content="https://gmaurovich.com/media/site/ec112a8887-1739956981/social.jpg" property="og:image">
+    <meta id="meta-social-image" content="" itemprop="image">
+    <meta id="meta-twitter-image" content="" name="twitter:image">
+    <meta id="meta-og-image" content="" property="og:image">
     
     <!-- Titles -->
-    <meta content="Giorgia Maurovich" itemprop="name">
-    <meta content="Giorgia Maurovich" name="twitter:title">
-    <meta content="Giorgia Maurovich" property="og:title">
-    <meta content="Giorgia Maurovich" property="og:site_name">
+    <meta id="meta-name" content="UG Traveller – Writers" itemprop="name">
+    <meta id="meta-twitter-title" content="UG Traveller – Writers" name="twitter:title">
+    <meta id="meta-og-title" content="UG Traveller – Writers" property="og:title">
+    <meta id="meta-og-sitename" content="UG Traveller – Writers" property="og:site_name">
 
     <!-- Descriptions -->
-    <meta content="" name="description">
-    <meta content="" itemprop="description">
-    <meta content="" name="twitter:description">
-    <meta content="" property="og:description">
+    <meta id="meta-description" content="" name="description">
+    <meta id="meta-itemprop-description" content="" itemprop="description">
+    <meta id="meta-twitter-description" content="" name="twitter:description">
+    <meta id="meta-og-description" content="" property="og:description">
 
     <!-- Facebook:extra -->
-    <meta property="og:url"  content="https://gmaurovich.com">
+    <meta property="og:url" content="">
     <meta property="og:type" content="website">
 
     <!-- Page Title -->
-    <title>Giorgia Maurovich</title>    <!-- For all browsers -->
-<link rel="icon" type="image/png" sizes="96x96" href="https://gmaurovich.com/assets/favicon/favicon-96x96.png">
+    <title id="page-title">UG Traveller – Writers</title>
 
-<!-- Good ol .ico -->
-<link rel="icon shortcut" href="https://gmaurovich.com/favicon.ico">
+    <!-- Favicon -->
+    <link id="favicon-png" rel="icon" type="image/png" sizes="96x96" href="images/favicon.ico">
+    <link id="favicon-ico" rel="icon shortcut" href="images/favicon.ico">
+    <link id="favicon-svg" rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link id="favicon-apple" rel="apple-touch-icon" type="image/png" sizes="180x180" href="images/favicon.ico">
 
-<!-- SVG Favicon -->
-<link rel="icon" type="image/svg+xml" href="https://gmaurovich.com/assets/favicon/favicon.svg">
-
-<!-- For Apple -->
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://gmaurovich.com/assets/favicon/apple-touch-icon.png">    
     <!-- Stylesheet -->
-    <link href="https://gmaurovich.com/assets/css/main.css?dbedbfcef2973c27de2b14e1e97695aa" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
 
@@ -58,15 +54,15 @@
     </div>
 
     <header class="header">
-        <h1 class="header-title"><a href="#home">Giorgia Maurovich</a></h1>
+        <h1 class="header-title"><a href="#home" id="site-name">UG Traveller – Writers</a></h1>
         <button class="header-button js-menu-button">MENU</button>
     </header>
 
     <nav class="menu js-menu-container">
         <div class="menu-inner grid">
             
-            <div class="menu-top">
-                <a class="menu-item" href="#articles">Articles</a>                <a class="menu-item" href="#translations">Translations</a>                                <a class="menu-item" href="#contacts">Contacts</a>
+            <div class="menu-top" id="menu-links">
+                <!-- Populated by Firebase -->
             </div>
 
             <div class="menu-bottom">
@@ -79,134 +75,386 @@
                 </div>
             </div>
         </div>
-    </nav><section class="intro grid">
-    <div class="intro-content">
-        <p>Giorgia Maurovich is a <a href="#articles">writer</a> <a href="#translations">translator</a> and researcher active in the cultural, artistic and literary sphere between Italy and Slovenia. She has a background in Foreign Languages, majoring in German and Polish, is currently in the field of Comparative Literature and at the moment she’s working on the <a href="#essays">first collection of literary essays</a>. When not thinking about literature, her interests are cities, exile, marginality, multilingualism, decay and memory.<br>If you need more information <a href="#contacts">contact her</a>.</p>    </div>
-</section><section class="section grid" id="articles">
-    <h2 class="section-title">Articles</h2>
+    </nav>
 
-    <button class="section-filters-button">Filters</button>
+    <!-- SPA Page Container -->
+    <div id="spa-pages">
 
-    <div class="section-filters-container">    
-        <form class="section-filters">
-            <fieldset class="section-filters-column">
-                            <input type="checkbox" id="articles-societa" name="articles-topics" value="società">
-                <label class="filter" for="articles-societa">società</label>
-                            <input type="checkbox" id="articles-arte" name="articles-topics" value="arte">
-                <label class="filter" for="articles-arte">arte</label>
-                            <input type="checkbox" id="articles-interviste" name="articles-topics" value="interviste">
-                <label class="filter" for="articles-interviste">interviste</label>
-                            <input type="checkbox" id="articles-letteratura" name="articles-topics" value="letteratura">
-                <label class="filter" for="articles-letteratura">letteratura</label>
-                            <input type="checkbox" id="articles-cinema" name="articles-topics" value="cinema">
-                <label class="filter" for="articles-cinema">cinema</label>
-                       </fieldset>
-            <fieldset class="section-filters-column">
-                            <input type="checkbox" id="articles-inglese" name="articles-languages" value="inglese">
-                <label class="filter" for="articles-inglese">inglese</label>
-                            <input type="checkbox" id="articles-sloveno" name="articles-languages" value="sloveno">
-                <label class="filter" for="articles-sloveno">sloveno</label>
-                            <input type="checkbox" id="articles-italiano" name="articles-languages" value="italiano">
-                <label class="filter" for="articles-italiano">italiano</label>
-                       </fieldset>
-        </form>
-    </div>
-    
-    <div class="section-content">
-                    <div class="article item" data-language="inglese" data-topic="societ&agrave;">
-    <p class='item-title'><a href='https://neweasterneurope.eu/2026/02/22/is-the-past-for-sale/' target='_blank'>Is the past for sale?</a></p>    <p class='item-subtitle'>New Eastern Europe</p></div>                    <div class="article item" data-language="sloveno" data-topic="arte">
-    <p class='item-title'><a href='https://zalozba-sophia.si/katalog/borec-st-835-837/' target='_blank'>Terorizem kot oblika umetnosti</a></p>    <p class='item-subtitle'>Borec</p></div>                    <div class="article item" data-language="italiano" data-topic="interviste, letteratura">
-    <p class='item-title'><a href='https://mestoknjige.si/project/igiaba-scego-dialoga-con-giorgia-maurovich/' target='_blank'>Un dialogo con Igiaba Scego</a></p>    <p class='item-subtitle'>Mesto Knjige</p></div>                    <div class="article item" data-language="inglese" data-topic="interviste, arte, societ&agrave;">
-    <p class='item-title'><a href='https://mestoknjige.si/project/robert-pfaller-in-an-interview-with-giorgia-maurovich/' target='_blank'>Interview with Robert Pfaller</a></p>    <p class='item-subtitle'>Mesto Knjige</p></div>                    <div class="article item" data-language="italiano, sloveno, inglese" data-topic="letteratura">
-    <p class='item-title'><a href='https://robidacollective.com/projects/publications/transmissions-radio-essays-on-edges-crossings-and-narrowcasting-borderlands' target='_blank'>Forms of Decay</a></p>    <p class='item-subtitle'>Robida</p></div>                    <div class="article item" data-language="sloveno" data-topic="societ&agrave;">
-    <p class='item-title'><a href='https://razpotja.si/razpotja_issue/razpotja-60-elite/' target='_blank'>Prvorazredni</a></p>    <p class='item-subtitle'>Razpotja</p></div>                    <div class="article item" data-language="sloveno" data-topic="societ&agrave;">
-    <p class='item-title'><a href='https://razpotja.si/razpotja_issue/razpotja-59-tehnodistopije/' target='_blank'>O nujnosti preučevanja grafov</a></p>    <p class='item-subtitle'>Razpotja</p></div>                    <div class="article item" data-language="sloveno" data-topic="societ&agrave;">
-    <p class='item-title'><a href='https://www.ludliteratura.si/knjigarna/revije/406/' target='_blank'>Borderless Brand</a></p>    <p class='item-subtitle'>Literatura</p></div>                    <div class="article item" data-language="italiano" data-topic="letteratura">
-    <p class='item-title'><a href='https://not.neroeditions.com/meditazioni-cibernetiche/' target='_blank'>Meditazioni cibernetiche</a></p>    <p class='item-subtitle'>NOTsfera</p></div>                    <div class="article item" data-language="italiano" data-topic="cinema">
-    <p class='item-title'><a href='https://www.meridiano13.it/wr-mysteries-of-the-organism-dusan-makavejev/' target='_blank'>WR: Mysteries of the Organism</a></p>    <p class='item-subtitle'>Meridiano 13</p></div>                    <div class="article item" data-language="sloveno" data-topic="letteratura, societ&agrave;">
-    <p class='item-title'><a href='https://razpotja.si/razpotja_issue/razpotja-57-starost/' target='_blank'>Preživetje želje kot upor proti smrti</a></p>    <p class='item-subtitle'>Razpotja</p></div>                    <div class="article item" data-language="italiano" data-topic="letteratura, societ&agrave;">
-    <p class='item-title'><a href='https://www.iltascabile.com/letterature/szymborska-forever/' target='_blank'>Szymborska forever</a></p>    <p class='item-subtitle'>Il Tascabile</p></div>                    <div class="article item" data-language="italiano" data-topic="letteratura">
-    <p class='item-title'><a href='https://www.iltascabile.com/letterature/tutto-il-tempo-di-georgi-gospodinov/' target='_blank'>Tutto il tempo di Georgi Gospodinov</a></p>    <p class='item-subtitle'>Il Tascabile</p></div>                    <div class="article item" data-language="italiano" data-topic="letteratura">
-    <p class='item-title'><a href='https://www.instagram.com/katarinagombocceh/p/DDUZhdxolQ8/' target='_blank'>Indiscrezioni</a></p>    <p class='item-subtitle'>November</p></div>                    <div class="article item" data-language="italiano" data-topic="letteratura">
-    <p class='item-title'><a href='https://www.iltascabile.com/letterature/il-capitale-isterico/' target='_blank'>Il capitale isterico</a></p>    <p class='item-subtitle'>Il Tascabile</p></div>                    <div class="article item" data-language="inglese" data-topic="interviste">
-    <p class='item-title'><a href='https://balkanism.com/products/balkanism-diversity-as-strength-issue-one-online' target='_blank'>Interview with Jeton Neziraj</a></p>    <p class='item-subtitle'>Balkanism</p></div>                    <div class="article item" data-language="italiano, sloveno, inglese" data-topic="">
-    <p class='item-title'><a href='https://robidacollective.com/projects/robida-magazine/robida-9' target='_blank'>Soil searching</a></p>    <p class='item-subtitle'>Robida</p></div>                    <div class="article item" data-language="italiano" data-topic="letteratura">
-    <p class='item-title'><a href='https://www.iltascabile.com/letterature/narrazione-liquida/' target='_blank'>Narrazione liquida</a></p>    <p class='item-subtitle'>Il Tascabile</p></div>                    <div class="article item" data-language="inglese" data-topic="letteratura, societ&agrave;">
-    <p class='item-title'><a href='https://lossi36.com/2023/12/05/literature-as-an-ethical-act-olga-tokarczuks-drive-your-plow-over-the-bones-of-the-dead-and-ecocriticism/' target='_blank'>Literature as an ethical act</a></p>    <p class='item-subtitle'>Lossi36</p></div>                    <div class="article item" data-language="italiano" data-topic="letteratura">
-    <p class='item-title'><a href='https://www.iltascabile.com/letterature/annie-ernaux-e-la-memoria-degli-ultimi/' target='_blank'>Annie Ernaux e la memoria degli ultimi</a></p>    <p class='item-subtitle'>Il Tascabile</p></div>                    <div class="article item" data-language="italiano" data-topic="letteratura">
-    <p class='item-title'><a href='https://www.iltascabile.com/letterature/la-letteratura-autodistruttiva-di-witold-gombrowicz/' target='_blank'>La letteratura autodistruttiva di Witold Gombrowicz</a></p>    <p class='item-subtitle'>Il Tascabile</p></div>                    <div class="article item" data-language="italiano" data-topic="cinema, societ&agrave;">
-    <p class='item-title'><a href='https://www.liminarivista.it/camera-obscura/il-primo-kieslowski-una-metafisica-della-polonia-popolare/' target='_blank'>Il primo Kieślowski</a></p>    <p class='item-subtitle'>Limina</p></div>                    <div class="article item" data-language="italiano" data-topic="letteratura">
-    <p class='item-title'><a href='https://www.iltascabile.com/letterature/il-fantasma-di-sylvia-plath/' target='_blank'>Il fantasma di Sylvia Plath</a></p>    <p class='item-subtitle'>Il Tascabile</p></div>                    <div class="article item" data-language="italiano" data-topic="societ&agrave;">
-    <p class='item-title'><a href='https://www.iltascabile.com/societa/pussy-riot/' target='_blank'>Il fenomeno Pussy Riot</a></p>    <p class='item-subtitle'>Il Tascabile</p></div>            </div>
-</section><section class="section grid" id="translations">
-    <h2 class="section-title">Translations</h2>
+        <!-- ===== HOME PAGE ===== -->
+        <div class="spa-page" data-page="home">
 
-    <button class="section-filters-button">Filters</button>
+            <section class="intro grid">
+                <div class="intro-content">
+                    <p id="intro-text"><!-- Populated by Firebase --></p>
+                </div>
+            </section>
 
-    <div class="section-filters-container">    
-        <form class="section-filters">
-            <fieldset class="section-filters-column">
-                            <input type="checkbox" id="translations-narrativa" name="translations-topics" value="narrativa">
-                <label class="filter" for="translations-narrativa">narrativa</label>
-                            <input type="checkbox" id="translations-poesia" name="translations-topics" value="poesia">
-                <label class="filter" for="translations-poesia">poesia</label>
-                       </fieldset>
-            <fieldset class="section-filters-column">
-                            <input type="checkbox" id="translations-sloveno" name="translations-languages" value="sloveno">
-                <label class="filter" for="translations-sloveno">sloveno</label>
-                       </fieldset>
-        </form>
-    </div>
-    
-    <div class="section-content">
-                    
-<div class="translation item" data-language="sloveno" data-topic="narrativa">
-    <div class="item-content">
-        <img class="item-cover" src="https://gmaurovich.com/media/pages/translations/soggetti-in-volo-racconto/6b56d613fb-1744051198/61302478-400x-q80.jpg" alt="">        <div class="item-info">
-            <p class='item-title'><a href='https://cela-europe.com/publications/non-ce-nessuno-come-te/' target='_blank'>Soggetti in volo (racconto)</a></p>            <p class='item-author'>Ajda Bračič</p>            <p class='item-subtitle'>CELA</p>        </div>
-    </div>
-    <p class='item-subtitle'>CELA</p></div>                    
-<div class="translation item" data-language="sloveno" data-topic="narrativa">
-    <div class="item-content">
-        <img class="item-cover" src="https://gmaurovich.com/media/pages/translations/acquagrave-estratto/dfdbdfd6f2-1744050654/175739450-400x-q80.jpg" alt="">        <div class="item-info">
-            <p class='item-title'><a href='https://cela-europe.com/publications/acquagrave/' target='_blank'>Acquagrave (estratto)</a></p>            <p class='item-author'>Pia Prezelj</p>            <p class='item-subtitle'>CELA</p>        </div>
-    </div>
-    <p class='item-subtitle'>CELA</p></div>                    
-<div class="translation item" data-language="sloveno" data-topic="narrativa">
-    <div class="item-content">
-        <img class="item-cover" src="https://gmaurovich.com/media/pages/translations/i-mondi-immaginari-di-edgar-kaos-estratto/e9b7a1ede4-1744050688/goga-lukovnjak-imaginarni-svetovi-naslovnica-1-1-400x-q80.jpg" alt="">        <div class="item-info">
-            <p class='item-title'><a href='https://cela-europe.com/publications/i-mondi-immaginari-di-edgar-kaos/' target='_blank'>I mondi immaginari di Edgar Kaos (estratto)</a></p>            <p class='item-author'>Julija Lukovnjak</p>            <p class='item-subtitle'>CELA</p>        </div>
-    </div>
-    <p class='item-subtitle'>CELA</p></div>                    
-<div class="translation item" data-language="sloveno" data-topic="poesia">
-    <div class="item-content">
-        <img class="item-cover" src="https://gmaurovich.com/media/pages/translations/a-year-in-a-sanatorium/4c93c8967e-1743144631/crna_skrinjica_2022_pino_pograjc_trgetanje-400x-q80.jpg" alt="">        <div class="item-info">
-            <p class='item-title'><a href='https://www.lospazioletterario.it/gli-amori-emarginati-unantologia-poetica-di-pino-pograjc/' target='_blank'>Trgetanje (poesie scelte)</a></p>            <p class='item-author'>Pino Pograjc</p>            <p class='item-subtitle'>Lo Spazio Letterario</p>        </div>
-    </div>
-    <p class='item-subtitle'>Lo Spazio Letterario</p></div>                    
-<div class="translation item" data-language="sloveno" data-topic="poesia">
-    <div class="item-content">
-        <img class="item-cover" src="https://gmaurovich.com/media/pages/translations/fotorevolver/0d433f2b8b-1744899492/v_drevo_1-400x-q80.jpg" alt="">        <div class="item-info">
-            <p class='item-title'><a href='https://perigeion.wordpress.com/2025/02/05/ana-pepelnik-una-poesia-in-forma-di-monologo/' target='_blank'>V drevo - una poesia in forma di monologo</a></p>            <p class='item-author'>Ana pepelnik</p>            <p class='item-subtitle'>Perigeion</p>        </div>
-    </div>
-    <p class='item-subtitle'>Perigeion</p></div>            </div>
-</section><section class="section grid" id="contacts">
-    <h2 class="section-title">Contacts</h2>
-    <div class="section-content">
-        
-        <a class="contacts-mail" href="mailto:mg.mavric@gmail.com ">mg.mavric@gmail.com </a>
-                <ul class="contacts-links">
-            <li class='contacts-link'><a href='http://instagram.com'>Instagram</a></li>            <li class='contacts-link'><a href='https://buttondown.com/'>Newsletter</a></li>        </ul>
-        
-                <img class="contacts-profile" lazyload src="https://gmaurovich.com/media/pages/home/e102a69ac1-1739956979/gm.jpg" alt="">
-        
-    </div>
-</section>    <footer class="footer grid">
+            <section class="section grid" id="articles">
+                <h2 class="section-title" id="articles-title">Articles</h2>
+
+                <button class="section-filters-button">Filters</button>
+
+                <div class="section-filters-container">
+                    <form class="section-filters">
+                        <fieldset class="section-filters-column" id="articles-topic-filters">
+                            <!-- Populated by Firebase -->
+                        </fieldset>
+                        <fieldset class="section-filters-column" id="articles-language-filters">
+                            <!-- Populated by Firebase -->
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="section-content" id="articles-list">
+                    <!-- Populated by Firebase -->
+                </div>
+            </section>
+
+            <section class="section grid" id="translations">
+                <h2 class="section-title" id="translations-title">Translations</h2>
+
+                <button class="section-filters-button">Filters</button>
+
+                <div class="section-filters-container">
+                    <form class="section-filters">
+                        <fieldset class="section-filters-column" id="translations-topic-filters">
+                            <!-- Populated by Firebase -->
+                        </fieldset>
+                        <fieldset class="section-filters-column" id="translations-language-filters">
+                            <!-- Populated by Firebase -->
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="section-content" id="translations-list">
+                    <!-- Populated by Firebase -->
+                </div>
+            </section>
+
+            <section class="section grid" id="apply">
+                <h2 class="section-title" id="apply-title">Write for Us</h2>
+                <div class="section-content">
+                    <div id="apply-intro-text"><!-- Populated by Firebase --></div>
+
+                    <form class="section-filters" id="writer-application-form" style="display:block; margin-top: 2rem;">
+                        <div class="section-filters-column" style="width:100%;">
+
+                            <div style="margin-bottom:1.5rem;">
+                                <label class="filter" for="apply-name" style="display:block; margin-bottom:0.5rem;">Full Name</label>
+                                <input type="text" id="apply-name" name="name" required placeholder="Your full name" style="width:100%; padding:0.75rem; background:transparent; border:1px solid currentColor; font-family:inherit; font-size:1rem; color:inherit;">
+                            </div>
+
+                            <div style="margin-bottom:1.5rem;">
+                                <label class="filter" for="apply-email" style="display:block; margin-bottom:0.5rem;">Email Address</label>
+                                <input type="email" id="apply-email" name="email" required placeholder="your@email.com" style="width:100%; padding:0.75rem; background:transparent; border:1px solid currentColor; font-family:inherit; font-size:1rem; color:inherit;">
+                            </div>
+
+                            <div style="margin-bottom:1.5rem;">
+                                <label class="filter" for="apply-topic" style="display:block; margin-bottom:0.5rem;">What would you like to write about?</label>
+                                <select id="apply-topic" name="topic" required style="width:100%; padding:0.75rem; background:transparent; border:1px solid currentColor; font-family:inherit; font-size:1rem; color:inherit; appearance:none;">
+                                    <option value="">Select a category</option>
+                                    <option value="Inspiration">Inspiration</option>
+                                    <option value="Style & Culture">Style &amp; Culture</option>
+                                    <option value="Food & Drinks">Food &amp; Drinks</option>
+                                    <option value="Women Travelling Uganda">Women Travelling Uganda</option>
+                                    <option value="Wellness & Spas">Wellness &amp; Spas</option>
+                                    <option value="News & Advice">News &amp; Advice</option>
+                                    <option value="Events">Events</option>
+                                    <option value="Podcasts">Podcasts</option>
+                                    <option value="Videos">Videos</option>
+                                    <option value="Traveller's Directory">Traveller's Directory</option>
+                                </select>
+                            </div>
+
+                            <div style="margin-bottom:1.5rem;">
+                                <label class="filter" for="apply-pitch" style="display:block; margin-bottom:0.5rem;">Tell us what you'd write about</label>
+                                <textarea id="apply-pitch" name="pitch" required rows="5" placeholder="Give us a brief description of the story or topic you have in mind..." style="width:100%; padding:0.75rem; background:transparent; border:1px solid currentColor; font-family:inherit; font-size:1rem; color:inherit; resize:vertical;"></textarea>
+                            </div>
+
+                            <button type="submit" id="apply-submit-btn" class="scheme" style="cursor:pointer;">Submit Application</button>
+                            <p id="apply-form-feedback" style="margin-top:1rem; display:none;"></p>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="section grid" id="contacts">
+                <h2 class="section-title">Contacts</h2>
+                <div class="section-content">
+                    <a class="contacts-mail" id="contacts-email" href="mailto:editor@ugtraveller.com">editor@ugtraveller.com</a>
+
+                    <ul class="contacts-links" id="contacts-links">
+                        <!-- Populated by Firebase -->
+                    </ul>
+
+                    <img class="contacts-profile" lazyload src="images/gm.jpg" alt="" id="contacts-profile-img">
+                </div>
+            </section>
+
+        </div><!-- end home page -->
+
+        <!-- ===== ADDITIONAL PAGES RENDERED HERE DYNAMICALLY ===== -->
+        <div id="dynamic-pages-container"></div>
+
+    </div><!-- end spa-pages -->
+
+    <footer class="footer grid">
         <div class="footer-content">
-            <a href="https://atto.si" target="_blank">GRAPHICS: ATTO</a>
+            <span id="footer-text">UG Traveller – Writers</span>
         </div>
-    </footer>    
-    <script src="https://gmaurovich.com/assets/js/site.js?de74213bc07e92a5cbdd4c111f67c367"></script>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        // ── PASTE YOUR FIREBASE CONFIG HERE ──────────────────────────────
+    const firebaseConfig = {
+  apiKey: "AIzaSyANyqDudAYNjZACFNlbwMVUlVVwrEKNNcA",
+  authDomain: "ugtraveller-writers.firebaseapp.com",
+  projectId: "ugtraveller-writers",
+  storageBucket: "ugtraveller-writers.firebasestorage.app",
+  messagingSenderId: "517529017438",
+  appId: "1:517529017438:web:341c7d5036705ee685a8cf"
+};
+        // ─────────────────────────────────────────────────────────────────
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // ── LOAD SITE SETTINGS ───────────────────────────────────────────
+        async function loadSettings() {
+            const snap = await getDoc(doc(db, "settings", "site"));
+            if (!snap.exists()) return;
+            const d = snap.data();
+
+            if (d.siteName) {
+                document.getElementById("page-title").textContent = d.siteName;
+                document.getElementById("site-name").textContent = d.siteName;
+                document.getElementById("meta-name").setAttribute("content", d.siteName);
+                document.getElementById("meta-twitter-title").setAttribute("content", d.siteName);
+                document.getElementById("meta-og-title").setAttribute("content", d.siteName);
+                document.getElementById("meta-og-sitename").setAttribute("content", d.siteName);
+            }
+            if (d.metaDescription) {
+                document.getElementById("meta-description").setAttribute("content", d.metaDescription);
+                document.getElementById("meta-itemprop-description").setAttribute("content", d.metaDescription);
+                document.getElementById("meta-twitter-description").setAttribute("content", d.metaDescription);
+                document.getElementById("meta-og-description").setAttribute("content", d.metaDescription);
+            }
+            if (d.faviconUrl) {
+                document.getElementById("favicon-png").setAttribute("href", d.faviconUrl);
+                document.getElementById("favicon-ico").setAttribute("href", d.faviconUrl);
+                document.getElementById("favicon-svg").setAttribute("href", d.faviconUrl);
+                document.getElementById("favicon-apple").setAttribute("href", d.faviconUrl);
+            }
+            if (d.footerText) document.getElementById("footer-text").textContent = d.footerText;
+            if (d.contactEmail) {
+                const el = document.getElementById("contacts-email");
+                el.textContent = d.contactEmail;
+                el.href = "mailto:" + d.contactEmail;
+            }
+            if (d.profileImage) document.getElementById("contacts-profile-img").src = d.profileImage;
+        }
+
+        // ── LOAD MENU ────────────────────────────────────────────────────
+        async function loadMenu() {
+            const snap = await getDoc(doc(db, "settings", "menu"));
+            if (!snap.exists()) return;
+            const { items } = snap.data();
+            const container = document.getElementById("menu-links");
+            container.innerHTML = "";
+            (items || []).forEach(item => {
+                const a = document.createElement("a");
+                a.className = "menu-item";
+                a.href = item.href;
+                a.textContent = item.label;
+                container.appendChild(a);
+            });
+        }
+
+        // ── LOAD INTRO ───────────────────────────────────────────────────
+        async function loadIntro() {
+            const snap = await getDoc(doc(db, "settings", "intro"));
+            if (!snap.exists()) return;
+            document.getElementById("intro-text").innerHTML = snap.data().html || "";
+        }
+
+        // ── LOAD APPLY SECTION ───────────────────────────────────────────
+        async function loadApplySection() {
+            const snap = await getDoc(doc(db, "settings", "apply"));
+            if (!snap.exists()) return;
+            const d = snap.data();
+            if (d.title) document.getElementById("apply-title").textContent = d.title;
+            if (d.introHtml) document.getElementById("apply-intro-text").innerHTML = d.introHtml;
+        }
+
+        // ── LOAD CONTACTS LINKS ──────────────────────────────────────────
+        async function loadContactLinks() {
+            const snap = await getDoc(doc(db, "settings", "contacts"));
+            if (!snap.exists()) return;
+            const { links } = snap.data();
+            const ul = document.getElementById("contacts-links");
+            ul.innerHTML = "";
+            (links || []).forEach(link => {
+                const li = document.createElement("li");
+                li.className = "contacts-link";
+                li.innerHTML = `<a href="${link.url}" target="_blank">${link.label}</a>`;
+                ul.appendChild(li);
+            });
+        }
+
+        // ── LOAD ARTICLES ────────────────────────────────────────────────
+        async function loadArticles() {
+            const snap = await getDocs(query(collection(db, "articles"), orderBy("order", "asc")));
+            const list = document.getElementById("articles-list");
+            const topicFilters = document.getElementById("articles-topic-filters");
+            const langFilters = document.getElementById("articles-language-filters");
+            const topics = new Set(), langs = new Set();
+
+            list.innerHTML = "";
+            snap.forEach(docSnap => {
+                const d = docSnap.data();
+                const div = document.createElement("div");
+                div.className = "article item";
+                div.setAttribute("data-language", d.language || "");
+                div.setAttribute("data-topic", d.topic || "");
+                div.innerHTML = `<p class='item-title'><a href='${d.url}' target='_blank'>${d.title}</a></p><p class='item-subtitle'>${d.subtitle}</p>`;
+                list.appendChild(div);
+                (d.topic || "").split(",").map(t => t.trim()).filter(Boolean).forEach(t => topics.add(t));
+                (d.language || "").split(",").map(l => l.trim()).filter(Boolean).forEach(l => langs.add(l));
+            });
+
+            topicFilters.innerHTML = "";
+            topics.forEach(t => {
+                const id = "articles-" + t.replace(/\s+/g, "-").toLowerCase();
+                topicFilters.innerHTML += `<input type="checkbox" id="${id}" name="articles-topics" value="${t}"><label class="filter" for="${id}">${t}</label>`;
+            });
+            langFilters.innerHTML = "";
+            langs.forEach(l => {
+                const id = "articles-lang-" + l.replace(/\s+/g, "-").toLowerCase();
+                langFilters.innerHTML += `<input type="checkbox" id="${id}" name="articles-languages" value="${l}"><label class="filter" for="${id}">${l}</label>`;
+            });
+        }
+
+        // ── LOAD TRANSLATIONS ────────────────────────────────────────────
+        async function loadTranslations() {
+            const snap = await getDocs(query(collection(db, "translations"), orderBy("order", "asc")));
+            const list = document.getElementById("translations-list");
+            const topicFilters = document.getElementById("translations-topic-filters");
+            const langFilters = document.getElementById("translations-language-filters");
+            const topics = new Set(), langs = new Set();
+
+            list.innerHTML = "";
+            snap.forEach(docSnap => {
+                const d = docSnap.data();
+                const div = document.createElement("div");
+                div.className = "translation item";
+                div.setAttribute("data-language", d.language || "");
+                div.setAttribute("data-topic", d.topic || "");
+                div.innerHTML = `
+                    <div class="item-content">
+                        <img class="item-cover" src="${d.coverImage || ''}" alt="">
+                        <div class="item-info">
+                            <p class='item-title'><a href='${d.url}' target='_blank'>${d.title}</a></p>
+                            <p class='item-author'>${d.author}</p>
+                            <p class='item-subtitle'>${d.subtitle}</p>
+                        </div>
+                    </div>
+                    <p class='item-subtitle'>${d.subtitle}</p>`;
+                list.appendChild(div);
+                (d.topic || "").split(",").map(t => t.trim()).filter(Boolean).forEach(t => topics.add(t));
+                (d.language || "").split(",").map(l => l.trim()).filter(Boolean).forEach(l => langs.add(l));
+            });
+
+            topicFilters.innerHTML = "";
+            topics.forEach(t => {
+                const id = "translations-" + t.replace(/\s+/g, "-").toLowerCase();
+                topicFilters.innerHTML += `<input type="checkbox" id="${id}" name="translations-topics" value="${t}"><label class="filter" for="${id}">${t}</label>`;
+            });
+            langFilters.innerHTML = "";
+            langs.forEach(l => {
+                const id = "translations-lang-" + l.replace(/\s+/g, "-").toLowerCase();
+                langFilters.innerHTML += `<input type="checkbox" id="${id}" name="translations-languages" value="${l}"><label class="filter" for="${id}">${l}</label>`;
+            });
+        }
+
+        // ── APPLICATION FORM SUBMIT ──────────────────────────────────────
+        async function setupForm() {
+            const form = document.getElementById("writer-application-form");
+            const feedback = document.getElementById("apply-form-feedback");
+            const btn = document.getElementById("apply-submit-btn");
+
+            // Load EmailJS config from Firestore
+            const ejsSnap = await getDoc(doc(db, "settings", "emailjs"));
+            const ejsCfg = ejsSnap.exists() ? ejsSnap.data() : {};
+
+            if (ejsCfg.publicKey) {
+                const script = document.createElement("script");
+                script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+                script.onload = () => emailjs.init({ publicKey: ejsCfg.publicKey });
+                document.head.appendChild(script);
+            }
+
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                btn.disabled = true;
+                btn.textContent = "Submitting…";
+
+                const payload = {
+                    name: document.getElementById("apply-name").value,
+                    email: document.getElementById("apply-email").value,
+                    topic: document.getElementById("apply-topic").value,
+                    pitch: document.getElementById("apply-pitch").value,
+                    status: "pending",
+                    submittedAt: new Date().toISOString()
+                };
+
+                try {
+                    // Save to Firestore applications collection
+                    const { addDoc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+                    await addDoc(collection(db, "applications"), payload);
+
+                    // Notify editor via EmailJS
+                    if (ejsCfg.publicKey && ejsCfg.serviceId && ejsCfg.notifyTemplateId) {
+                        await emailjs.send(ejsCfg.serviceId, ejsCfg.notifyTemplateId, {
+                            applicant_name: payload.name,
+                            applicant_email: payload.email,
+                            topic: payload.topic,
+                            pitch: payload.pitch
+                        });
+                    }
+
+                    feedback.style.display = "block";
+                    feedback.textContent = "Application submitted! We'll be in touch soon.";
+                    form.reset();
+                } catch (err) {
+                    console.error(err);
+                    feedback.style.display = "block";
+                    feedback.textContent = "Something went wrong. Please try again.";
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = "Submit Application";
+                }
+            });
+        }
+
+        // ── INIT ─────────────────────────────────────────────────────────
+        Promise.all([
+            loadSettings(),
+            loadMenu(),
+            loadIntro(),
+            loadApplySection(),
+            loadContactLinks(),
+            loadArticles(),
+            loadTranslations(),
+            setupForm()
+        ]).catch(console.error);
+    </script>
+
+    <!-- Original site JS -->
+    <script src="js/site.js"></script>
 
 </body>
 </html>
