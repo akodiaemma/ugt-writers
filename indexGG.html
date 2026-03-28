@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en" id="home" data-scheme="white">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="theme-color" content="#fff">
+    <link rel="preload" href="fonts/NHaasGroteskDSPro-65Md.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <meta name="robots" content="index, follow">
+    <meta id="meta-social-image" content="" itemprop="image">
+    <meta id="meta-twitter-image" content="" name="twitter:image">
+    <meta id="meta-og-image" content="" property="og:image">
+    <meta id="meta-name" content="UG Traveller – Writers" itemprop="name">
+    <meta id="meta-twitter-title" content="UG Traveller – Writers" name="twitter:title">
+    <meta id="meta-og-title" content="UG Traveller – Writers" property="og:title">
+    <meta id="meta-og-sitename" content="UG Traveller – Writers" property="og:site_name">
+    <meta id="meta-description" content="" name="description">
+    <meta id="meta-itemprop-description" content="" itemprop="description">
+    <meta id="meta-twitter-description" content="" name="twitter:description">
+    <meta id="meta-og-description" content="" property="og:description">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <title id="page-title">UG Traveller – Writers</title>
+    <link id="favicon-png" rel="icon" type="image/png" sizes="96x96" href="images/favicon.ico">
+    <link id="favicon-ico" rel="icon shortcut" href="images/favicon.ico">
+    <link id="favicon-svg" rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link id="favicon-apple" rel="apple-touch-icon" type="image/png" sizes="180x180" href="images/favicon.ico">
+    <link href="css/main.css" rel="stylesheet">
+    <style>
+        /* ── SPA ── */
+        .spa-page          { display: none; }
+        .spa-page.is-active { display: block; }
+
+        /* ════════════════════════════════════════════════
+           SWISS LAYOUT SYSTEM
+           All sections use .sw-section flex rows.
+           Left col = label/title. Right col = content.
+           Dividers top of every section.
+           ════════════════════════════════════════════════ */
+
+        /* Page wrapper */
+        #spa-pages {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Every section: top border divider + flex row */
+        .sw-section {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid currentColor;
+            padding: 2.5rem 0;
+            gap: 1.5rem;
+        }
+        @media (min-width: 680px) {
+            .sw-section {
+                flex-direction: row;
+                gap: 0;
+            }
+        }
+
+        /* Left column — label / section title */
+        .sw-left {
+            flex: 0 0 38%;
+            padding-right: 3rem;
+        }
+
+        /* Right column — content */
+        .sw-right {
+            flex: 1;
+        }
+
+        /* Section label (replaces section-title in Swiss layout) */
+        .sw-label {
+            font-family: "Denim", sans-serif;
+            font-weight: 500;
+            font-size: clamp(11px, 0.9vw, 13px);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            line-height: 1.4;
+            margin: 0;
+            padding-top: 0.15rem;
+        }
+
+        /* Intro / hero section */
+        .sw-intro {
+            padding: 8vh 0 6vh;
+            border-top: none;
+        }
+        .sw-intro-text {
+            font-family: "PPW", serif;
+            font-size: clamp(18px, 2vw, 26px);
+            line-height: 1.4;
+            letter-spacing: -0.02em;
+            max-width: 720px;
+        }
+        .sw-intro-text a {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* Item rows inside sections */
+        .sw-item {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 0;
+            border-top: 1px solid currentColor;
+            gap: 0.2rem;
+        }
+        .sw-item:first-child { border-top: none; }
+        @media (min-width: 500px) {
+            .sw-item {
+                flex-direction: row;
+                align-items: baseline;
+                gap: 2rem;
+            }
+        }
+
+        /* Item title */
+        .sw-item-title {
+            font-family: "PPW", serif;
+            font-size: clamp(16px, 1.2vw, 21px);
+            letter-spacing: -0.025em;
+            line-height: 1.3;
+            flex: 1;
+            margin: 0;
+        }
+        .sw-item-title a {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+        .sw-item-title a:hover { text-decoration-color: transparent; }
+
+        /* Item subtitle / publication */
+        .sw-item-sub {
+            font-family: "Denim", sans-serif;
+            font-size: clamp(11px, 0.85vw, 13px);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            opacity: 0.55;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Translation items (with cover image) */
+        .sw-trans-item {
+            display: flex;
+            gap: 1.25rem;
+            padding: 1rem 0;
+            border-top: 1px solid currentColor;
+            align-items: flex-start;
+        }
+        .sw-trans-item:first-child { border-top: none; }
+        .sw-trans-cover {
+            width: 48px;
+            flex-shrink: 0;
+            display: block;
+        }
+        .sw-trans-info { flex: 1; }
+        .sw-trans-author {
+            font-family: "Denim", sans-serif;
+            font-size: clamp(11px, 0.85vw, 12px);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-top: 0.2rem;
+        }
+
+        /* Filter pills */
+        .sw-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+        .sw-filters input[type="checkbox"] { position: absolute; left: -9999px; }
+        .sw-filters label {
+            font-family: "Denim", sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid currentColor;
+            padding: 3px 10px;
+            cursor: pointer;
+            opacity: 0.45;
+            transition: opacity 0.15s;
+        }
+        .sw-filters label:hover { opacity: 0.8; }
+        .sw-filters input:checked + label { opacity: 1; }
+
+        /* ── FORM — Swiss typography ── */
+        .sw-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .sw-field {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid currentColor;
+            padding: 1.1rem 0;
+        }
+        .sw-field:first-child { border-top: none; }
+        @media (min-width: 600px) {
+            .sw-field {
+                flex-direction: row;
+                align-items: baseline;
+                gap: 2rem;
+            }
+        }
+        .sw-field-label {
+            font-family: "Denim", sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            opacity: 0.5;
+            flex: 0 0 200px;
+            padding-top: 0.15rem;
+            margin-bottom: 0.5rem;
+        }
+        @media (min-width: 600px) { .sw-field-label { margin-bottom: 0; } }
+        .sw-field input,
+        .sw-field textarea,
+        .sw-field select {
+            font-family: "PPW", serif;
+            font-size: clamp(15px, 1.1vw, 18px);
+            letter-spacing: -0.01em;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid currentColor;
+            width: 100%;
+            padding: 0.3rem 0;
+            color: inherit;
+            outline: none;
+            resize: none;
+            appearance: none;
+        }
+        .sw-field input::placeholder,
+        .sw-field textarea::placeholder { opacity: 0.3; }
+        .sw-field textarea { min-height: 100px; }
+        .sw-field-wrap { flex: 1; }
+
+        /* Submit button */
+        .sw-submit {
+            margin-top: 2rem;
+            font-family: "Denim", sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: 1px solid currentColor;
+            background: transparent;
+            color: inherit;
+            padding: 0.75rem 2rem;
+            cursor: pointer;
+            transition: opacity 0.15s;
+        }
+        .sw-submit:hover { opacity: 0.6; }
+        .sw-submit:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        /* Form feedback */
+        .sw-feedback {
+            margin-top: 1rem;
+            font-family: "Denim", sans-serif;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: none;
+        }
+
+        /* Contacts */
+        .sw-contact-email {
+            font-family: "PPW", serif;
+            font-size: clamp(18px, 1.8vw, 26px);
+            letter-spacing: -0.02em;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .sw-contact-email:hover { text-decoration-color: transparent; }
+        .sw-contact-links { list-style: none; margin: 0; padding: 0; }
+        .sw-contact-link {
+            font-family: "PPW", serif;
+            font-size: clamp(15px, 1.2vw, 20px);
+            letter-spacing: -0.02em;
+            padding: 0.4rem 0;
+            border-top: 1px solid currentColor;
+        }
+        .sw-contact-link:first-child { border-top: none; }
+        .sw-contact-link a { text-decoration: none; }
+        .sw-contact-link a:hover { text-decoration: underline; text-underline-offset: 3px; }
+        .sw-profile {
+            display: block;
+            width: 100%;
+            max-width: 180px;
+            margin-top: 2rem;
+        }
+
+        /* Text block (right col body text) */
+        .sw-body {
+            font-family: "PPW", serif;
+            font-size: clamp(15px, 1.2vw, 20px);
+            line-height: 1.5;
+            letter-spacing: -0.02em;
+        }
+        .sw-body a { text-decoration: underline; text-underline-offset: 3px; }
+
+        /* is-hidden for filters */
+        .is-hidden { opacity: 0.18 !important; pointer-events: none; }
+
+        /* Footer override */
+        .footer { border-top: 1px solid currentColor; margin-top: 4rem; }
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            font-family: "Denim", sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.45;
+        }
+
+        /* Text Block section type */
+        .text-block { grid-template-areas: none; }
+        .text-block-title { grid-area: unset; }
+        .text-block-body  { grid-area: unset; }
+    </style>
+</head>
+<body>
+
+<div class="lines grid"><div class="line"></div><div class="line"></div></div>
+
+<header class="header">
+    <h1 class="header-title"><a href="?" id="site-name">UG Traveller – Writers</a></h1>
+    <button class="header-button js-menu-button">MENU</button>
+</header>
+
+<nav class="menu js-menu-container">
+    <div class="menu-inner grid">
+        <div class="menu-top" id="menu-links"></div>
+        <div class="menu-bottom">
+            <p>Pick your <br>background color</p>
+            <div class="schemes">
+                <button class="scheme js-scheme-button scheme-active" value="white">Plain white</button>
+                <button class="scheme js-scheme-button" value="gray">Concrete grey</button>
+                <button class="scheme js-scheme-button" value="black">Deep black</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="spa-pages">
+
+    <!-- HOME PAGE -->
+    <div class="spa-page is-active" data-page="home" id="page-home">
+
+        <!-- INTRO -->
+        <section class="sw-intro">
+            <p class="sw-intro-text" id="intro-text"></p>
+        </section>
+
+        <!-- GUIDELINES / ARTICLES -->
+        <section class="sw-section" id="articles">
+            <div class="sw-left">
+                <h2 class="sw-label" id="articles-title">Guidelines</h2>
+            </div>
+            <div class="sw-right">
+                <!-- Filters -->
+                <div class="sw-filters" id="articles-filters-wrap">
+                    <div id="articles-topic-filters"></div>
+                    <div id="articles-language-filters"></div>
+                </div>
+                <div id="articles-list"></div>
+            </div>
+        </section>
+
+        <!-- TRANSLATIONS -->
+        <section class="sw-section" id="translations">
+            <div class="sw-left">
+                <h2 class="sw-label" id="translations-title">Translations</h2>
+            </div>
+            <div class="sw-right">
+                <div class="sw-filters" id="translations-filters-wrap">
+                    <div id="translations-topic-filters"></div>
+                    <div id="translations-language-filters"></div>
+                </div>
+                <div id="translations-list"></div>
+            </div>
+        </section>
+
+        <!-- APPLY -->
+        <section class="sw-section" id="apply">
+            <div class="sw-left">
+                <h2 class="sw-label" id="apply-title">Apply. Join The People</h2>
+            </div>
+            <div class="sw-right">
+                <div id="apply-intro-text" class="sw-body" style="margin-bottom:2rem;"></div>
+                <form class="sw-form" id="writer-application-form">
+
+                    <div class="sw-field">
+                        <label class="sw-field-label" for="apply-name">Full Name</label>
+                        <div class="sw-field-wrap">
+                            <input type="text" id="apply-name" name="name" required placeholder="Your full name">
+                        </div>
+                    </div>
+
+                    <div class="sw-field">
+                        <label class="sw-field-label" for="apply-email">Email Address</label>
+                        <div class="sw-field-wrap">
+                            <input type="email" id="apply-email" name="email" required placeholder="your@email.com">
+                        </div>
+                    </div>
+
+                    <div class="sw-field">
+                        <label class="sw-field-label" for="apply-topic">Category</label>
+                        <div class="sw-field-wrap">
+                            <select id="apply-topic" name="topic" required>
+                                <option value="">Select a category</option>
+                                <option value="Inspiration">Inspiration</option>
+                                <option value="Style & Culture">Style &amp; Culture</option>
+                                <option value="Food & Drinks">Food &amp; Drinks</option>
+                                <option value="Women Travelling Uganda">Women Travelling Uganda</option>
+                                <option value="Wellness & Spas">Wellness &amp; Spas</option>
+                                <option value="News & Advice">News &amp; Advice</option>
+                                <option value="Events">Events</option>
+                                <option value="Podcasts">Podcasts</option>
+                                <option value="Videos">Videos</option>
+                                <option value="Traveller's Directory">Traveller's Directory</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="sw-field">
+                        <label class="sw-field-label" for="apply-pitch">Your Pitch</label>
+                        <div class="sw-field-wrap">
+                            <textarea id="apply-pitch" name="pitch" required placeholder="Tell us about the story or topic you have in mind…"></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" id="apply-submit-btn" class="sw-submit">Submit Application</button>
+                        <p id="apply-form-feedback" class="sw-feedback"></p>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+        <!-- CONTACTS -->
+        <section class="sw-section" id="contacts">
+            <div class="sw-left">
+                <h2 class="sw-label">Contacts</h2>
+            </div>
+            <div class="sw-right">
+                <a class="sw-contact-email" id="contacts-email" href="mailto:editor@ugtraveller.com">editor@ugtraveller.com</a>
+                <ul class="sw-contact-links" id="contacts-links"></ul>
+                <img class="sw-profile" lazyload src="images/gm.jpg" alt="" id="contacts-profile-img">
+            </div>
+        </section>
+
+    </div><!-- end home -->
+
+    <!-- DYNAMIC PAGES -->
+    <div id="dynamic-pages-container"></div>
+
+</div><!-- end spa-pages -->
+
+<footer class="footer grid">
+    <div class="footer-content"><span id="footer-text">UG Traveller – Writers</span></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, collection, getDocs, addDoc, orderBy, query }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyANyqDudAYNjZACFNlbwMVUlVVwrEKNNcA",
+    authDomain: "ugtraveller-writers.firebaseapp.com",
+    projectId: "ugtraveller-writers",
+    storageBucket: "ugtraveller-writers.firebasestorage.app",
+    messagingSenderId: "517529017438",
+    appId: "1:517529017438:web:341c7d5036705ee685a8cf"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+// ══════════════════════════════════
+// SPA ROUTER  — ?page=slug
+// ══════════════════════════════════
+function getSlug() {
+    return new URLSearchParams(window.location.search).get("page") || "home";
+}
+function navigate(slug) {
+    history.pushState({ slug }, "", slug === "home" ? "?" : "?page=" + slug);
+    showPage(slug);
+}
+window.addEventListener("popstate", e => showPage(e.state?.slug || getSlug()));
+
+function showPage(slug) {
+    document.querySelectorAll(".spa-page").forEach(p => p.classList.remove("is-active"));
+    if (slug === "home") {
+        document.getElementById("page-home").classList.add("is-active");
+        return;
+    }
+    const existing = document.querySelector(`.spa-page[data-page="${slug}"]`);
+    if (existing) { existing.classList.add("is-active"); return; }
+    renderDynamicPage(slug);
+}
+
+// ══════════════════════════════════
+// SECTION RENDERERS
+// ══════════════════════════════════
+function renderSection(sec) {
+    const id = sec.id || ("sec-" + Math.random().toString(36).slice(2));
+    switch (sec.type) {
+        case "intro":
+            return `<section class="sw-intro">
+                <p class="sw-intro-text">${sec.html || ""}</p>
+            </section>`;
+
+        case "text_block":
+            return `<section class="sw-section">
+                <div class="sw-left"><h2 class="sw-label">${sec.title || ""}</h2></div>
+                <div class="sw-right sw-body">${sec.body || ""}</div>
+            </section>`;
+
+        case "articles":
+            return `<section class="sw-section">
+                <div class="sw-left"><h2 class="sw-label">${sec.title || "Articles"}</h2></div>
+                <div class="sw-right">
+                    <div class="sw-filters"><div id="dyn-art-topics-${id}"></div><div id="dyn-art-langs-${id}"></div></div>
+                    <div id="dyn-art-list-${id}" data-async="articles" data-sec="${id}"></div>
+                </div>
+            </section>`;
+
+        case "translations":
+            return `<section class="sw-section">
+                <div class="sw-left"><h2 class="sw-label">${sec.title || "Translations"}</h2></div>
+                <div class="sw-right">
+                    <div class="sw-filters"><div id="dyn-tr-topics-${id}"></div><div id="dyn-tr-langs-${id}"></div></div>
+                    <div id="dyn-tr-list-${id}" data-async="translations" data-sec="${id}"></div>
+                </div>
+            </section>`;
+
+        case "apply":
+            return `<section class="sw-section">
+                <div class="sw-left"><h2 class="sw-label">${sec.title || "Write for Us"}</h2></div>
+                <div class="sw-right"><div class="sw-body">${sec.introHtml || ""}</div></div>
+            </section>`;
+
+        case "contacts":
+            return `<section class="sw-section">
+                <div class="sw-left"><h2 class="sw-label">Contacts</h2></div>
+                <div class="sw-right">
+                    <a class="sw-contact-email" href="mailto:${sec.email||""}">${sec.email||""}</a>
+                    <ul class="sw-contact-links">${(sec.links||[]).map(l=>`<li class="sw-contact-link"><a href="${l.url}" target="_blank">${l.label}</a></li>`).join("")}</ul>
+                    ${sec.profileImage ? `<img class="sw-profile" src="${sec.profileImage}" alt="">` : ""}
+                </div>
+            </section>`;
+
+        default: return "";
+    }
+}
+
+async function renderDynamicPage(slug) {
+    const snap = await getDoc(doc(db, "pages", slug));
+    const container = document.getElementById("dynamic-pages-container");
+    const div = document.createElement("div");
+    div.className = "spa-page is-active";
+    div.setAttribute("data-page", slug);
+
+    if (!snap.exists()) {
+        div.innerHTML = `<section class="intro grid"><div class="intro-content"><p>Page not found.</p></div></section>`;
+        container.appendChild(div);
+        return;
+    }
+
+    const sections = (snap.data().sections || []).sort((a, b) => (a.order||0) - (b.order||0));
+    div.innerHTML = sections.map(renderSection).join("");
+    container.appendChild(div);
+
+    // Hydrate async sections
+    div.querySelectorAll("[data-async='articles']").forEach(el => populateArticles(el.dataset.sec));
+    div.querySelectorAll("[data-async='translations']").forEach(el => populateTranslations(el.dataset.sec));
+}
+
+async function populateArticles(id) {
+    const list   = document.getElementById(`dyn-art-list-${id}`);
+    const topics = document.getElementById(`dyn-art-topics-${id}`);
+    const langs  = document.getElementById(`dyn-art-langs-${id}`);
+    if (!list) return;
+    const snap = await getDocs(query(collection(db, "articles"), orderBy("order","asc")));
+    const ts = new Set(), ls = new Set();
+    snap.forEach(d => {
+        const a = d.data();
+        list.innerHTML += `<div class="article item no-line" data-language="${a.language||""}" data-topic="${a.topic||""}">
+            <p class="item-title"><a href="${a.url}" target="_blank">${a.title}</a></p>
+            <p class="item-subtitle">${a.subtitle}</p></div>`;
+        (a.topic||"").split(",").map(t=>t.trim()).filter(Boolean).forEach(t=>ts.add(t));
+        (a.language||"").split(",").map(l=>l.trim()).filter(Boolean).forEach(l=>ls.add(l));
+    });
+    ts.forEach(t => { topics.innerHTML += `<input type="checkbox" id="a-t-${id}-${t}" name="at" value="${t}"><label class="filter" for="a-t-${id}-${t}">${t}</label>`; });
+    ls.forEach(l => { langs.innerHTML  += `<input type="checkbox" id="a-l-${id}-${l}" name="al" value="${l}"><label class="filter" for="a-l-${id}-${l}">${l}</label>`; });
+}
+
+async function populateTranslations(id) {
+    const list   = document.getElementById(`dyn-tr-list-${id}`);
+    const topics = document.getElementById(`dyn-tr-topics-${id}`);
+    const langs  = document.getElementById(`dyn-tr-langs-${id}`);
+    if (!list) return;
+    const snap = await getDocs(query(collection(db, "translations"), orderBy("order","asc")));
+    const ts = new Set(), ls = new Set();
+    snap.forEach(d => {
+        const t = d.data();
+        list.innerHTML += `<div class="translation item" data-language="${t.language||""}" data-topic="${t.topic||""}">
+            <div class="item-content">
+                <img class="item-cover" src="${t.coverImage||""}" alt="">
+                <div class="item-info">
+                    <p class="item-title"><a href="${t.url}" target="_blank">${t.title}</a></p>
+                    <p class="item-author">${t.author}</p>
+                    <p class="item-subtitle">${t.subtitle}</p>
+                </div>
+            </div>
+            <p class="item-subtitle">${t.subtitle}</p></div>`;
+        (t.topic||"").split(",").map(x=>x.trim()).filter(Boolean).forEach(x=>ts.add(x));
+        (t.language||"").split(",").map(x=>x.trim()).filter(Boolean).forEach(x=>ls.add(x));
+    });
+    ts.forEach(t => { topics.innerHTML += `<input type="checkbox" id="t-t-${id}-${t}" name="tt" value="${t}"><label class="filter" for="t-t-${id}-${t}">${t}</label>`; });
+    ls.forEach(l => { langs.innerHTML  += `<input type="checkbox" id="t-l-${id}-${l}" name="tl" value="${l}"><label class="filter" for="t-l-${id}-${l}">${l}</label>`; });
+}
+
+// ══════════════════════════════════
+// HOME PAGE LOADERS
+// ══════════════════════════════════
+async function loadSettings() {
+    const snap = await getDoc(doc(db, "settings", "site"));
+    if (!snap.exists()) return;
+    const d = snap.data();
+    if (d.siteName) {
+        document.getElementById("page-title").textContent = d.siteName;
+        document.getElementById("site-name").textContent  = d.siteName;
+        ["meta-name","meta-twitter-title","meta-og-title","meta-og-sitename"].forEach(id =>
+            document.getElementById(id)?.setAttribute("content", d.siteName));
+    }
+    if (d.metaDescription) {
+        ["meta-description","meta-itemprop-description","meta-twitter-description","meta-og-description"].forEach(id =>
+            document.getElementById(id)?.setAttribute("content", d.metaDescription));
+    }
+    if (d.faviconUrl) {
+        ["favicon-png","favicon-ico","favicon-svg","favicon-apple"].forEach(id =>
+            document.getElementById(id)?.setAttribute("href", d.faviconUrl));
+    }
+    if (d.footerText)   document.getElementById("footer-text").textContent = d.footerText;
+    if (d.contactEmail) {
+        const el = document.getElementById("contacts-email");
+        if (el) { el.textContent = d.contactEmail; el.href = "mailto:" + d.contactEmail; }
+    }
+    if (d.profileImage) document.getElementById("contacts-profile-img").src = d.profileImage;
+}
+
+async function loadMenu() {
+    const snap = await getDoc(doc(db, "settings", "menu"));
+    if (!snap.exists()) return;
+    const container = document.getElementById("menu-links");
+    container.innerHTML = "";
+    (snap.data().items || []).forEach(item => {
+        const a = document.createElement("a");
+        a.className   = "menu-item";
+        a.textContent = item.label;
+        a.href        = item.href || "#";
+        // SPA page links use ?page= format
+        if (item.href && item.href.startsWith("?page=")) {
+            a.addEventListener("click", e => {
+                e.preventDefault();
+                navigate(new URLSearchParams(item.href.slice(1)).get("page"));
+            });
+        }
+        container.appendChild(a);
+    });
+}
+
+async function loadIntro() {
+    const snap = await getDoc(doc(db, "settings", "intro"));
+    if (snap.exists()) document.getElementById("intro-text").innerHTML = snap.data().html || "";
+}
+
+async function loadApplySection() {
+    const snap = await getDoc(doc(db, "settings", "apply"));
+    if (!snap.exists()) return;
+    const d = snap.data();
+    if (d.title)     document.getElementById("apply-title").textContent = d.title;
+    if (d.introHtml) document.getElementById("apply-intro-text").innerHTML = d.introHtml;
+}
+
+async function loadContactLinks() {
+    const snap = await getDoc(doc(db, "settings", "contacts"));
+    if (!snap.exists()) return;
+    const ul = document.getElementById("contacts-links");
+    ul.innerHTML = "";
+    (snap.data().links || []).forEach(link => {
+        const li = document.createElement("li");
+        li.className = "sw-contact-link";
+        li.innerHTML = `<a href="${link.url}" target="_blank">${link.label}</a>`;
+        ul.appendChild(li);
+    });
+}
+
+async function loadArticles() {
+    const snap  = await getDocs(query(collection(db, "articles"), orderBy("order","asc")));
+    const list  = document.getElementById("articles-list");
+    const tFilt = document.getElementById("articles-topic-filters");
+    const lFilt = document.getElementById("articles-language-filters");
+    const ts = new Set(), ls = new Set();
+    list.innerHTML = "";
+    snap.forEach(d => {
+        const a = d.data();
+        list.innerHTML += `<div class="sw-item article item" data-language="${a.language||""}" data-topic="${a.topic||""}">
+            <p class="sw-item-title item-title"><a href="${a.url}" target="_blank">${a.title}</a></p>
+            <span class="sw-item-sub item-subtitle">${a.subtitle}</span></div>`;
+        (a.topic||"").split(",").map(t=>t.trim()).filter(Boolean).forEach(t=>ts.add(t));
+        (a.language||"").split(",").map(l=>l.trim()).filter(Boolean).forEach(l=>ls.add(l));
+    });
+    tFilt.innerHTML = "<div class='sw-filters'>";
+    ts.forEach(t => { const id="articles-"+t.replace(/\s+/g,"-").toLowerCase(); tFilt.innerHTML+=`<input type="checkbox" id="${id}" name="articles-topics" value="${t}"><label for="${id}">${t}</label>`; });
+    tFilt.innerHTML += "</div>";
+    lFilt.innerHTML = "<div class='sw-filters'>";
+    ls.forEach(l => { const id="articles-lang-"+l.replace(/\s+/g,"-").toLowerCase(); lFilt.innerHTML+=`<input type="checkbox" id="${id}" name="articles-languages" value="${l}"><label for="${id}">${l}</label>`; });
+    lFilt.innerHTML += "</div>";
+}
+
+async function loadTranslations() {
+    const snap  = await getDocs(query(collection(db, "translations"), orderBy("order","asc")));
+    const list  = document.getElementById("translations-list");
+    const tFilt = document.getElementById("translations-topic-filters");
+    const lFilt = document.getElementById("translations-language-filters");
+    const ts = new Set(), ls = new Set();
+    list.innerHTML = "";
+    snap.forEach(d => {
+        const t = d.data();
+        list.innerHTML += `<div class="sw-trans-item translation item" data-language="${t.language||""}" data-topic="${t.topic||""}">
+            ${t.coverImage ? `<img class="sw-trans-cover item-cover" src="${t.coverImage}" alt="">` : ""}
+            <div class="sw-trans-info item-info">
+                <p class="sw-item-title item-title"><a href="${t.url}" target="_blank">${t.title}</a></p>
+                <p class="sw-trans-author item-author">${t.author}</p>
+                <span class="sw-item-sub item-subtitle">${t.subtitle}</span>
+            </div></div>`;
+        (t.topic||"").split(",").map(x=>x.trim()).filter(Boolean).forEach(x=>ts.add(x));
+        (t.language||"").split(",").map(x=>x.trim()).filter(Boolean).forEach(x=>ls.add(x));
+    });
+    tFilt.innerHTML = "<div class='sw-filters'>";
+    ts.forEach(t => { const id="translations-"+t.replace(/\s+/g,"-").toLowerCase(); tFilt.innerHTML+=`<input type="checkbox" id="${id}" name="translations-topics" value="${t}"><label for="${id}">${t}</label>`; });
+    tFilt.innerHTML += "</div>";
+    lFilt.innerHTML = "<div class='sw-filters'>";
+    ls.forEach(l => { const id="translations-lang-"+l.replace(/\s+/g,"-").toLowerCase(); lFilt.innerHTML+=`<input type="checkbox" id="${id}" name="translations-languages" value="${l}"><label for="${id}">${l}</label>`; });
+    lFilt.innerHTML += "</div>";
+}
+
+async function setupForm() {
+    const form     = document.getElementById("writer-application-form");
+    const feedback = document.getElementById("apply-form-feedback");
+    const btn      = document.getElementById("apply-submit-btn");
+    const ejsSnap  = await getDoc(doc(db, "settings", "emailjs"));
+    const ejsCfg   = ejsSnap.exists() ? ejsSnap.data() : {};
+    if (ejsCfg.publicKey) {
+        const s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+        s.onload = () => emailjs.init({ publicKey: ejsCfg.publicKey });
+        document.head.appendChild(s);
+    }
+    form.addEventListener("submit", async e => {
+        e.preventDefault();
+        btn.disabled = true; btn.textContent = "Submitting…";
+        const payload = {
+            name: document.getElementById("apply-name").value,
+            email: document.getElementById("apply-email").value,
+            topic: document.getElementById("apply-topic").value,
+            pitch: document.getElementById("apply-pitch").value,
+            status: "pending",
+            submittedAt: new Date().toISOString()
+        };
+        try {
+            await addDoc(collection(db, "applications"), payload);
+            if (ejsCfg.publicKey && ejsCfg.serviceId && ejsCfg.notifyTemplateId) {
+                await emailjs.send(ejsCfg.serviceId, ejsCfg.notifyTemplateId, {
+                    applicant_name: payload.name, applicant_email: payload.email,
+                    topic: payload.topic, pitch: payload.pitch
+                });
+            }
+            feedback.style.display = "block";
+            feedback.textContent = "Application submitted! We'll be in touch soon.";
+            form.reset();
+        } catch(err) {
+            console.error(err);
+            feedback.style.display = "block";
+            feedback.textContent = "Something went wrong. Please try again.";
+        } finally {
+            btn.disabled = false; btn.textContent = "Submit Application";
+        }
+    });
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────
+Promise.all([
+    loadSettings(), loadMenu(), loadIntro(), loadApplySection(),
+    loadContactLink

@@ -35,7 +35,6 @@
         @media (min-width:1200px) { .text-block { grid-template-areas: "title title title body body body body body . ."; } }
         .text-block-title { grid-area: title; }
         .text-block-body  { grid-area: body; letter-spacing: -0.035em; }
-.section-filters-container{display:none;}
     </style>
 </head>
 <body>
@@ -285,7 +284,7 @@ async function populateArticles(id) {
     const ts = new Set(), ls = new Set();
     snap.forEach(d => {
         const a = d.data();
-        list.innerHTML += `<div class="article item" data-language="${a.language||""}" data-topic="${a.topic||""}">
+        list.innerHTML += `<div class="article item no-line" data-language="${a.language||""}" data-topic="${a.topic||""}">
             <p class="item-title"><a href="${a.url}" target="_blank">${a.title}</a></p>
             <p class="item-subtitle">${a.subtitle}</p></div>`;
         (a.topic||"").split(",").map(t=>t.trim()).filter(Boolean).forEach(t=>ts.add(t));
