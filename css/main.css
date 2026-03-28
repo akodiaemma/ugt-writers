@@ -324,9 +324,11 @@
     font-size: var(--text-base);
     font-weight: 500;
     letter-spacing: -0.01em;
+    pointer-events: none;
+
 }
 .item-title a { transition: color 0.2s; }
-.item:hover .item-title a { color: var(--text-muted); text-decoration: none !important; }
+.item:hover .item-title a { color: var(--text-main); text-decoration: none !important; }
 
 .item-subtitle, .item-author {
     font-size: var(--text-base);
@@ -359,6 +361,11 @@
     gap: 2rem;
     width: 100%;
 }
+
+.item-info {
+    pointer-events: none;
+}
+
 #writer-application-form .section-filters-column {
     width: 100%;
 }
