@@ -258,6 +258,8 @@
     flex-direction: column;
 }
 
+    .section-filters-button { display: none !important; }
+
 /* Desktop Grid Enforcement */
 @media (min-width: 1024px) {
     .section { border-top: none; padding-top: 0; }
@@ -467,8 +469,8 @@
 
 /* 1. Prevent any element from forcing horizontal scroll */
 html, body {
-    max-width: 100vw;
-    overflow-x: hidden;
+max-width: 100vw;
+    overflow-x: clip;
 }
 
 /* 2. Force long text and URLs to break so they don't stretch the grid */
@@ -554,5 +556,72 @@ html, body {
     /* Hide the mobile-specific paragraph when on larger screens */
     .translation.item .item-content .item-subtitle {
         display: none;
+    }
+}
+
+
+/* =========================================
+   EXPANDABLE DRAWER (ACCORDION)
+   ========================================= */
+
+/* Make the whole row look clickable */
+.translation.item {
+    cursor: pointer;
+}
+
+/* Add a '+' icon to the right of the title */
+.translation.item .item-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.translation.item .item-title::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+    transition: transform 0.2s ease-out;
+}
+
+/* Hide everything except the title by default */
+.translation.item .item-cover,
+.translation.item .item-author,
+.translation.item .item-content > .item-subtitle,
+.translation.item > .item-subtitle {
+    display: none;
+}
+
+/* Flatten the grid layout when closed so the title takes full width */
+.translation.item:not(.is-open) .item-content {
+    display: block;
+}
+
+/* --- EXPANDED (OPEN) STATE --- */
+
+/* Rotate '+' into an 'x' */
+.translation.item.is-open .item-title::after {
+    transform: rotate(45deg);
+}
+
+/* Show the content again */
+.translation.item.is-open .item-cover,
+.translation.item.is-open .item-author {
+    display: block;
+}
+
+/* Restore the Desktop Grid layout when open */
+@media (min-width: 768px) {
+    .translation.item.is-open .item-content {
+        display: grid;
+    }
+}
+
+/* Restore the Mobile Flex layout when open */
+@media (max-width: 767px) {
+    .translation.item.is-open .item-content {
+        display: flex;
+    }
+    .translation.item.is-open .item-content .item-subtitle {
+        display: block;
     }
 }

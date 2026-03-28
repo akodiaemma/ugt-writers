@@ -501,6 +501,25 @@ const initialSlug = getSlug();
 if (initialSlug !== "home") renderDynamicPage(initialSlug);
 </script>
 
+<script>
+// Accordion Drawer Logic
+document.addEventListener('click', function(e) {
+    // Check if the click happened inside a translation item
+    const drawerItem = e.target.closest('.translation.item');
+    
+    if (drawerItem) {
+        // If the user specifically clicked the <a> link, let them go to the URL
+        if (e.target.tagName.toLowerCase() === 'a') {
+            return; 
+        }
+        
+        // Otherwise, stop text from highlighting and toggle the drawer open/closed
+        e.preventDefault();
+        drawerItem.classList.toggle('is-open');
+    }
+});
+</script>
+
 <script src="js/site.js"></script>
 </body>
 </html>
