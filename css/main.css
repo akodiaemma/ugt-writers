@@ -541,7 +541,7 @@ max-width: 100vw;
         order: 3;
         width: 100%;
         max-width: 100%;
-        aspect-ratio: 16 / 9; /* Creates a nice cinematic crop for the mobile view */
+        aspect-ratio: 9 / 16; /* Creates a nice cinematic crop for the mobile view */
         object-fit: cover;
     }
     /* 4. Paragraph finishes the block */
