@@ -203,9 +203,6 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     LOGIN SCREEN
-══════════════════════════════════════ -->
 <div id="login-screen">
     <div class="login-box">
         <h1>UG Traveller</h1>
@@ -223,9 +220,6 @@
     </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     APP
-══════════════════════════════════════ -->
 <div id="app">
     <div class="topbar">
         <span class="topbar-brand">UG Traveller — Admin</span>
@@ -236,7 +230,6 @@
     </div>
 
     <div class="layout">
-        <!-- SIDEBAR -->
         <nav class="sidebar">
             <div class="sidebar-section">
                 <div class="sidebar-label">Pages</div>
@@ -266,10 +259,8 @@
             </div>
         </nav>
 
-        <!-- MAIN -->
         <main class="main">
 
-            <!-- ── APPLICATIONS ── -->
             <div class="panel active" id="panel-applications">
                 <div class="panel-header">
                     <h2>Writer Applications</h2>
@@ -285,7 +276,6 @@
                 <div class="tab-panel" id="tab-rejected"><div id="apps-rejected-list"></div></div>
             </div>
 
-            <!-- ── INTRO ── -->
             <div class="panel" id="panel-intro">
                 <div class="panel-header">
                     <h2>Intro Text</h2>
@@ -302,7 +292,6 @@
                 </div>
             </div>
 
-            <!-- ── ARTICLES ── -->
             <div class="panel" id="panel-articles">
                 <div class="panel-header">
                     <h2>Articles</h2>
@@ -317,7 +306,6 @@
                 </div>
             </div>
 
-            <!-- ── TRANSLATIONS ── -->
             <div class="panel" id="panel-translations">
                 <div class="panel-header">
                     <h2>Translations</h2>
@@ -332,7 +320,6 @@
                 </div>
             </div>
 
-            <!-- ── APPLY SECTION ── -->
             <div class="panel" id="panel-apply-section">
                 <div class="panel-header">
                     <h2>Apply Section</h2>
@@ -352,7 +339,6 @@
                 </div>
             </div>
 
-            <!-- ── SETTINGS GENERAL ── -->
             <div class="panel" id="panel-settings-general">
                 <div class="panel-header">
                     <h2>General Settings</h2>
@@ -388,7 +374,6 @@
                 </div>
             </div>
 
-            <!-- ── SETTINGS MENU ── -->
             <div class="panel" id="panel-settings-menu">
                 <div class="panel-header">
                     <h2>Navigation Menu</h2>
@@ -405,7 +390,6 @@
                 </div>
             </div>
 
-            <!-- ── SETTINGS CONTACTS ── -->
             <div class="panel" id="panel-settings-contacts">
                 <div class="panel-header">
                     <h2>Social Links</h2>
@@ -422,7 +406,6 @@
                 </div>
             </div>
 
-            <!-- ── EMAIL TEMPLATES ── -->
             <div class="panel" id="panel-email-templates">
                 <div class="panel-header">
                     <h2>Email Templates</h2>
@@ -474,7 +457,6 @@
                 </div>
             </div>
 
-            <!-- ── EMAIL CONFIG ── -->
             <div class="panel" id="panel-email-config">
                 <div class="panel-header">
                     <h2>EmailJS Configuration</h2>
@@ -511,7 +493,6 @@
             </div>
 
 
-            <!-- ── PAGES ── -->
             <div class="panel" id="panel-pages">
                 <div class="panel-header">
                     <h2>Pages</h2>
@@ -563,9 +544,6 @@
     </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     ARTICLE MODAL
-══════════════════════════════════════ -->
 <div class="modal-overlay" id="article-modal">
     <div class="modal">
         <div class="modal-header">
@@ -608,9 +586,6 @@
     </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     TRANSLATION MODAL
-══════════════════════════════════════ -->
 <div class="modal-overlay" id="translation-modal">
     <div class="modal">
         <div class="modal-header">
@@ -652,8 +627,15 @@
         </div>
         <div class="field">
             <label>Cover Image URL</label>
-            <input type="text" id="translation-cover" placeholder="images/cover.jpg or https://...">
-            <p class="hint">Enter an image URL or path to your local images folder.</p>
+            <div style="display: flex; gap: 10px; margin-bottom: 0.5rem;">
+                <input type="text" id="translation-cover" placeholder="https://..." style="flex: 1;">
+            </div>
+            
+            <div class="img-upload-area" id="translation-upload-area">
+                <p id="translation-upload-text">Drag & drop or click to upload image</p>
+                <input type="file" id="translation-file-upload" accept="image/*">
+            </div>
+            <p class="hint" id="translation-upload-progress" style="display:none; color: var(--accent); font-weight: bold; margin-top: 8px;">Uploading... 0%</p>
         </div>
         <div style="display:flex; gap:0.75rem; margin-top:0.5rem;">
             <button class="btn btn-primary" id="translation-save-btn">Save Translation</button>
@@ -662,9 +644,6 @@
     </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     APPLICATION RESPOND MODAL
-══════════════════════════════════════ -->
 <div class="modal-overlay" id="respond-modal">
     <div class="modal">
         <div class="modal-header">
@@ -693,9 +672,6 @@
     </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     FIREBASE + APP JS
-══════════════════════════════════════ -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import {
@@ -705,6 +681,9 @@
         getFirestore, doc, getDoc, setDoc, collection, getDocs,
         addDoc, updateDoc, deleteDoc, query, orderBy
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import {
+        getStorage, ref, uploadBytesResumable, getDownloadURL
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
     // ── PASTE YOUR FIREBASE CONFIG HERE ──────────────────────────────────
    const firebaseConfig = {
@@ -720,6 +699,7 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+    const storage = getStorage(app);
 
     let ejsConfig = {};
     let emailTemplates = {};
@@ -1221,6 +1201,57 @@ document.getElementById("respond-send-btn").addEventListener("click", async () =
         document.getElementById("translation-order").value = translations.length;
         document.getElementById("translation-modal").classList.add("open");
     });
+    
+    // ── IMAGE UPLOAD LOGIC FOR TRANSLATIONS ───────────────────────────────
+    const fileInput = document.getElementById('translation-file-upload');
+    const uploadProgress = document.getElementById('translation-upload-progress');
+    const coverInput = document.getElementById('translation-cover');
+
+    fileInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Create a unique file name
+        const fileExt = file.name.split('.').pop();
+        const fileName = `covers/${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+        const storageRef = ref(storage, fileName);
+
+        // Start Upload
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        uploadProgress.style.display = 'block';
+        uploadProgress.textContent = 'Uploading... 0%';
+        uploadProgress.style.color = 'var(--accent)';
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // Update progress percentage
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                uploadProgress.textContent = `Uploading... ${Math.round(progress)}%`;
+            },
+            (error) => {
+                // Handle Error
+                console.error('Upload failed:', error);
+                uploadProgress.textContent = 'Upload failed. Try again.';
+                uploadProgress.style.color = 'var(--red)';
+            },
+            async () => {
+                // Upload Complete - Get URL
+                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                coverInput.value = downloadURL; // Paste URL into the input field
+                
+                uploadProgress.textContent = 'Upload complete ✓';
+                uploadProgress.style.color = 'var(--green)';
+                
+                // Hide message after 3 seconds
+                setTimeout(() => {
+                    uploadProgress.style.display = 'none';
+                    fileInput.value = ''; // Reset file input
+                }, 3000);
+            }
+        );
+    });
+
     document.getElementById("translation-save-btn").addEventListener("click", async () => {
         const id = document.getElementById("translation-edit-id").value;
         const data = {
