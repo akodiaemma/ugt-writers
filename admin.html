@@ -954,37 +954,6 @@ document.getElementById("respond-send-btn").addEventListener("click", async () =
             });
         }
 
-        // 2. If accepting — create WordPress contributor account
-        if (action === "accept") {
-            const wpSnap = await getDoc(doc(db, "settings", "wordpress"));
-            if (wpSnap.exists()) {
-                const wp = wpSnap.data();
-                const credentials = btoa(`${wp.username}:${wp.appPassword}`);
-
-                // Generate a username from the email
-                const wpUsername = email.split("@")[0].replace(/[^a-zA-Z0-9]/g, "") + Math.floor(Math.random() * 100);
-
-                const wpRes = await fetch(`${wp.siteUrl}/wp-json/wp/v2/users`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Basic ${credentials}`
-                    },
-                    body: JSON.stringify({
-                        username: wpUsername,
-                        email:    email,
-                        roles:    [wp.role || "contributor"],
-                        password: crypto.randomUUID(), // strong random password
-                        send_user_notification: true   // WP sends its own welcome email
-                    })
-                });
-
-                if (!wpRes.ok) {
-                    const err = await wpRes.json();
-                    throw new Error("WordPress error: " + (err.message || wpRes.status));
-                }
-            }
-        }
 
         // 3. Update Firestore status
         await updateDoc(doc(db, "applications", id), { status: newStatus });
