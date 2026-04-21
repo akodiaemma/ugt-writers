@@ -424,7 +424,7 @@ function init(){
 /* ---- firestore listener ---- */
 function startListener(){
   if(unsub) unsub();
-  unsub = db.collection('articles')
+ unsub = db.collection('ugt_articles_queue')
     .orderBy('createdAt','desc')
     .limit(60)
     .onSnapshot(snap => {
@@ -507,7 +507,7 @@ async function submitArticle(){
 
   let docRef;
   try {
-    docRef = await db.collection('articles').add({
+    docRef = await db.collection('ugt_articles_queue').add({
       title,
       author:      author.name,
       authorColor: author.color,
@@ -696,7 +696,7 @@ function saveWebhook(){
 
 async function confirmClearQueue(){
   showConfirm('Clear all queue data?','All articles will be deleted from Firestore.', async ()=>{
-    const snap = await db.collection('articles').get();
+    const snap = await db.collection('ugt_articles_queue').get();
     const batch = db.batch();
     snap.docs.forEach(d=>batch.delete(d.ref));
     await batch.commit();
