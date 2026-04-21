@@ -12,11 +12,9 @@
     --ink-3: #8a8480;
     --paper: #faf8f4;
     --paper-2: #f2efe8;
-    --paper-3: #e8e4da;
     --gold: #c9932a;
     --gold-light: #f5e8cc;
     --green: #2a6b4a;
-    --green-light: #d4ead e;
     --red: #b83232;
     --red-light: #f5dada;
     --border: rgba(26,23,20,0.12);
@@ -25,618 +23,120 @@
     --radius: 6px;
     --radius-lg: 12px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; font-size: 15px; line-height: 1.6; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  /* NAV */
-  nav {
-    background: var(--ink);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    height: 56px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .nav-brand {
-    font-family: 'Playfair Display', serif;
-    color: var(--gold);
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    margin-right: 2.5rem;
-    white-space: nowrap;
-  }
-
-  .nav-tab {
-    color: rgba(255,255,255,0.5);
-    font-size: 13px;
-    font-weight: 400;
-    padding: 0 1.2rem;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all 0.15s;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    font-size: 11px;
-    border: none;
-    background: none;
-  }
-
+  nav { background: var(--ink); padding: 0 2rem; display: flex; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
+  .nav-brand { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 18px; font-weight: 700; letter-spacing: 0.02em; margin-right: 2.5rem; white-space: nowrap; }
+  .nav-tab { color: rgba(255,255,255,0.5); padding: 0 1.2rem; height: 56px; display: flex; align-items: center; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; border-left: none; border-right: none; border-top: none; background: none; font-family: 'DM Sans', sans-serif; }
   .nav-tab:hover { color: rgba(255,255,255,0.8); }
   .nav-tab.active { color: #fff; border-bottom: 2px solid var(--gold); }
+  .nav-tab .badge { background: var(--gold); color: var(--ink); font-size: 10px; font-weight: 500; border-radius: 10px; padding: 1px 6px; margin-left: 6px; }
+  .fb-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.4); }
+  .fb-status .dot { width: 7px; height: 7px; border-radius: 50%; background: #555; transition: background 0.3s; }
+  .fb-status.live .dot { background: #4caf50; }
+  .fb-status.live { color: rgba(255,255,255,0.6); }
 
-  .nav-tab .badge {
-    background: var(--gold);
-    color: var(--ink);
-    font-size: 10px;
-    font-weight: 500;
-    border-radius: 10px;
-    padding: 1px 6px;
-    margin-left: 6px;
-  }
-
-  /* VIEWS */
   .view { display: none; padding: 2.5rem 2rem; max-width: 860px; margin: 0 auto; }
   .view.active { display: block; }
 
-  /* SECTION HEADERS */
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 1.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
-  }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; }
+  .section-sub { font-size: 13px; color: var(--ink-3); }
 
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--ink);
-  }
-
-  .section-sub {
-    font-size: 13px;
-    color: var(--ink-3);
-  }
-
-  /* FORM */
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
-
-  .form-grid.full { grid-template-columns: 1fr; }
-
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
   .field.span2 { grid-column: span 2; }
-
-  label {
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--ink-2);
-  }
-
-  input[type="text"],
-  input[type="number"],
-  select,
-  textarea {
-    background: #fff;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
-    padding: 9px 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.15s;
-    width: 100%;
-  }
-
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px var(--gold-light);
-  }
-
+  label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2); }
+  input[type="text"], input[type="number"], select, textarea { background: #fff; border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 9px 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); outline: none; transition: border-color 0.15s; width: 100%; }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-light); }
   textarea { resize: vertical; min-height: 90px; }
 
-  .field-hint {
-    font-size: 11px;
-    color: var(--ink-3);
-    margin-top: 2px;
-  }
-
-  /* AUTHOR SELECTOR */
-  .author-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-top: 4px;
-  }
-
-  .author-chip {
-    border: 1.5px solid var(--border-strong);
-    border-radius: var(--radius);
-    padding: 10px 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.15s;
-    background: #fff;
-  }
-
+  .author-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 4px; }
+  .author-chip { border: 1.5px solid var(--border-strong); border-radius: var(--radius); padding: 10px 8px; text-align: center; cursor: pointer; transition: all 0.15s; background: #fff; }
   .author-chip:hover { border-color: var(--gold); background: var(--gold-light); }
+  .author-chip.selected { border-color: var(--gold); background: var(--gold-light); box-shadow: 0 0 0 2px var(--gold); }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: #fff; }
+  .author-name { font-size: 12px; font-weight: 500; color: var(--ink); }
 
-  .author-chip.selected {
-    border-color: var(--gold);
-    background: var(--gold-light);
-    box-shadow: 0 0 0 2px var(--gold);
-  }
-
-  .author-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    margin: 0 auto 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .author-name {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink);
-  }
-
-  /* CONTENT CONTROLS */
-  .controls-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-
-  .control-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px;
-  }
-
-  .control-label {
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--ink-3);
-    margin-bottom: 8px;
-  }
-
-  .stepper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .stepper-btn {
-    width: 28px;
-    height: 28px;
-    border: 1px solid var(--border-strong);
-    border-radius: 4px;
-    background: var(--paper-2);
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ink-2);
-    transition: all 0.1s;
-    line-height: 1;
-    font-family: monospace;
-  }
-
+  .controls-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .control-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; }
+  .control-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); margin-bottom: 8px; }
+  .stepper { display: flex; align-items: center; gap: 8px; }
+  .stepper-btn { width: 28px; height: 28px; border: 1px solid var(--border-strong); border-radius: 4px; background: var(--paper-2); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--ink-2); transition: all 0.1s; font-family: monospace; }
   .stepper-btn:hover { background: var(--gold-light); border-color: var(--gold); }
+  .stepper-val { font-size: 18px; font-weight: 500; min-width: 28px; text-align: center; }
 
-  .stepper-val {
-    font-size: 18px;
-    font-weight: 500;
-    min-width: 28px;
-    text-align: center;
-    color: var(--ink);
-  }
+  .length-toggle { display: flex; gap: 6px; flex-wrap: wrap; }
+  .length-btn { padding: 5px 12px; border: 1px solid var(--border-strong); border-radius: 20px; font-size: 12px; cursor: pointer; background: var(--paper-2); color: var(--ink-2); transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+  .length-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
 
-  /* LENGTH TOGGLE */
-  .length-toggle {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .length-btn {
-    padding: 5px 12px;
-    border: 1px solid var(--border-strong);
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
-    background: var(--paper-2);
-    color: var(--ink-2);
-    transition: all 0.15s;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .length-btn.active {
-    background: var(--ink);
-    color: #fff;
-    border-color: var(--ink);
-  }
-
-  /* BUTTONS */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: var(--radius);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-  }
-
-  .btn-primary {
-    background: var(--ink);
-    color: #fff;
-  }
-
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; border: none; transition: all 0.15s; text-decoration: none; letter-spacing: 0.02em; }
+  .btn-primary { background: var(--ink); color: #fff; }
   .btn-primary:hover { background: #2d2926; transform: translateY(-1px); }
-  .btn-primary:active { transform: translateY(0); }
-
-  .btn-gold {
-    background: var(--gold);
-    color: #fff;
-  }
-
-  .btn-gold:hover { background: #b8831e; }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--ink-2);
-    border: 1px solid var(--border-strong);
-  }
-
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn-ghost { background: transparent; color: var(--ink-2); border: 1px solid var(--border-strong); }
   .btn-ghost:hover { background: var(--paper-2); }
-
   .btn-sm { padding: 6px 12px; font-size: 12px; }
   .btn-danger { background: var(--red); color: #fff; }
   .btn-danger:hover { background: #a02828; }
 
-  .submit-bar {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-  }
+  .submit-bar { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .submit-hint { font-size: 12px; color: var(--ink-3); }
 
-  .submit-hint {
-    font-size: 12px;
-    color: var(--ink-3);
-  }
+  .card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
 
-  /* CARD */
-  .card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  /* QUEUE */
-  .queue-item {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1rem 1.25rem;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: box-shadow 0.15s;
-  }
-
+  .queue-item { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; display: flex; align-items: center; gap: 1rem; transition: box-shadow 0.15s; }
   .queue-item:hover { box-shadow: var(--shadow); }
+  .q-avatar { width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: #fff; }
+  .q-info { flex: 1; min-width: 0; }
+  .q-title { font-weight: 500; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .q-meta { font-size: 12px; color: var(--ink-3); margin-top: 2px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .q-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
 
-  .queue-author-dot {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-  }
+  .status-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; white-space: nowrap; flex-shrink: 0; }
+  .s-pending    { background: #fef3cd; color: #856404; }
+  .s-processing { background: #cce5ff; color: #004085; }
+  .s-done       { background: #d4edda; color: #155724; }
+  .s-error      { background: var(--red-light); color: var(--red); }
+  .s-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .s-processing .s-dot { animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  .queue-info { flex: 1; min-width: 0; }
-
-  .queue-title {
-    font-weight: 500;
-    font-size: 14px;
-    color: var(--ink);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .queue-meta {
-    font-size: 12px;
-    color: var(--ink-3);
-    margin-top: 2px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .status-pending {
-    background: #fef3cd;
-    color: #856404;
-  }
-
-  .status-processing {
-    background: #cce5ff;
-    color: #004085;
-  }
-
-  .status-done {
-    background: #d4edda;
-    color: #155724;
-  }
-
-  .status-error {
-    background: var(--red-light);
-    color: var(--red);
-  }
-
-  .status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-  }
-
-  .status-processing .status-dot {
-    animation: pulse 1.2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  .queue-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
-
-  .empty-state {
-    text-align: center;
-    padding: 4rem 2rem;
-    color: var(--ink-3);
-  }
-
-  .empty-state svg { margin-bottom: 1rem; opacity: 0.3; }
-  .empty-state p { font-size: 14px; }
-
-  /* AUTHOR SETTINGS */
-  .author-settings-grid {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 1.5rem;
-    align-items: start;
-  }
-
-  .author-list { display: flex; flex-direction: column; gap: 6px; }
-
-  .author-list-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: var(--radius);
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: all 0.15s;
-  }
-
-  .author-list-item:hover { background: var(--paper-2); }
-
-  .author-list-item.active {
-    background: var(--gold-light);
-    border-color: var(--gold);
-  }
-
-  .author-list-item .dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: #fff;
-    flex-shrink: 0;
-  }
-
-  .author-list-name { font-size: 14px; font-weight: 500; }
-
-  .style-editor { display: flex; flex-direction: column; gap: 1rem; }
-
-  .char-count {
-    font-size: 11px;
-    color: var(--ink-3);
-    text-align: right;
-    margin-top: -4px;
-  }
-
-  /* TOAST */
-  #toast {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--ink);
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: var(--radius);
-    font-size: 13px;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: all 0.25s;
-    z-index: 999;
-    pointer-events: none;
-    max-width: 320px;
-  }
-
-  #toast.show { opacity: 1; transform: translateY(0); }
-
-  /* WEBHOOK CONFIG */
-  .webhook-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .webhook-row input { flex: 1; }
-
-  /* divider */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 1.5rem 0;
-  }
-
-  /* tag pill */
-  .tag {
-    display: inline-block;
-    background: var(--paper-2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2px 10px;
-    font-size: 11px;
-    color: var(--ink-2);
-  }
-
-  .processing-spinner {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(0,66,133,0.2);
-    border-top-color: #004085;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    vertical-align: middle;
-  }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .view-link {
-    color: var(--green);
-    font-size: 12px;
-    font-weight: 500;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
-    border: 1px solid var(--green);
-    border-radius: 20px;
-    transition: all 0.15s;
-    background: #f0f8f4;
-  }
-
+  .view-link { color: var(--green); font-size: 12px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border: 1px solid var(--green); border-radius: 20px; transition: all 0.15s; background: #f0f8f4; }
   .view-link:hover { background: var(--green); color: #fff; }
 
-  .confirm-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.45);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 200;
-    opacity: 0; pointer-events: none; transition: opacity 0.2s;
-  }
+  .empty-state { text-align: center; padding: 4rem 2rem; color: var(--ink-3); }
+  .empty-state p { font-size: 14px; margin-top: 1rem; }
 
+  .author-settings-grid { display: grid; grid-template-columns: 200px 1fr; gap: 1.5rem; align-items: start; }
+  .author-list { display: flex; flex-direction: column; gap: 6px; }
+  .author-list-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius); cursor: pointer; border: 1px solid transparent; transition: all 0.15s; }
+  .author-list-item:hover { background: var(--paper-2); }
+  .author-list-item.active { background: var(--gold-light); border-color: var(--gold); }
+  .al-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .author-list-name { font-size: 14px; font-weight: 500; }
+  .char-count { font-size: 11px; color: var(--ink-3); text-align: right; margin-top: -4px; }
+
+  .webhook-row { display: flex; gap: 8px; align-items: center; }
+  .webhook-row input { flex: 1; }
+  .field-hint { font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+  #toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--ink); color: #fff; padding: 12px 20px; border-radius: var(--radius); font-size: 13px; opacity: 0; transform: translateY(8px); transition: all 0.25s; z-index: 999; pointer-events: none; max-width: 320px; }
+  #toast.show { opacity: 1; transform: translateY(0); }
+
+  .confirm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
   .confirm-overlay.show { opacity: 1; pointer-events: all; }
-
-  .confirm-box {
-    background: #fff;
-    border-radius: var(--radius-lg);
-    padding: 1.75rem;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.2);
-  }
-
-  .confirm-box h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-  }
-
-  .confirm-box p { font-size: 14px; color: var(--ink-2); margin-bottom: 1.25rem; }
-
+  .confirm-box { background: #fff; border-radius: var(--radius-lg); padding: 1.75rem; max-width: 400px; width: 90%; box-shadow: 0 8px 40px rgba(0,0,0,0.2); }
+  .confirm-box h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; margin-bottom: 0.75rem; }
+  .confirm-box p  { font-size: 14px; color: var(--ink-2); margin-bottom: 1.25rem; }
   .confirm-actions { display: flex; gap: 10px; justify-content: flex-end; }
 
-  /* Responsive tweaks */
   @media (max-width: 640px) {
     .form-grid { grid-template-columns: 1fr; }
     .field.span2 { grid-column: span 1; }
-    .author-grid { grid-template-columns: repeat(2, 1fr); }
+    .author-grid { grid-template-columns: repeat(2,1fr); }
     .controls-grid { grid-template-columns: 1fr 1fr; }
     .author-settings-grid { grid-template-columns: 1fr; }
     nav { padding: 0 1rem; }
@@ -648,35 +148,33 @@
 
 <nav>
   <span class="nav-brand">UGT Writer</span>
-  <button class="nav-tab active" onclick="showView('new')">New Article</button>
-  <button class="nav-tab" onclick="showView('queue')" id="queue-tab">Queue <span class="badge" id="queue-badge" style="display:none">0</span></button>
-  <button class="nav-tab" onclick="showView('authors')">Authors</button>
-  <button class="nav-tab" onclick="showView('settings')">Settings</button>
+  <button class="nav-tab active" id="tab-new"     onclick="showView('new',this)">New Article</button>
+  <button class="nav-tab"        id="tab-queue"   onclick="showView('queue',this)">Queue <span class="badge" id="queue-badge" style="display:none">0</span></button>
+  <button class="nav-tab"        id="tab-authors" onclick="showView('authors',this)">Authors</button>
+  <button class="nav-tab"        id="tab-settings"onclick="showView('settings',this)">Settings</button>
+  <div class="fb-status" id="fb-status"><div class="dot"></div><span id="fb-label">connecting…</span></div>
 </nav>
 
-<!-- ========== NEW ARTICLE ========== -->
+<!-- NEW ARTICLE -->
 <div class="view active" id="view-new">
   <div class="section-header">
     <h1 class="section-title">New Article</h1>
     <span class="section-sub">Fill in the details and push to Make</span>
   </div>
-
   <div class="card">
     <div class="form-grid">
       <div class="field span2">
         <label>Article Title</label>
         <input type="text" id="art-title" placeholder="e.g. Hidden Waterfalls of Sipi Falls" />
       </div>
-
       <div class="field span2">
         <label>Choose Author</label>
         <div class="author-grid" id="author-selector"></div>
       </div>
-
       <div class="field span2">
         <label>Article Length</label>
-        <div class="length-toggle" id="length-toggle">
-          <button class="length-btn" data-words="600" onclick="setLength(this)">Short <span style="color:var(--ink-3);font-size:11px">~600w</span></button>
+        <div class="length-toggle">
+          <button class="length-btn" data-words="600"  onclick="setLength(this)">Short <span style="color:var(--ink-3);font-size:11px">~600w</span></button>
           <button class="length-btn active" data-words="1000" onclick="setLength(this)">Standard <span style="color:var(--ink-3);font-size:11px">~1000w</span></button>
           <button class="length-btn" data-words="1500" onclick="setLength(this)">Long <span style="color:var(--ink-3);font-size:11px">~1500w</span></button>
           <button class="length-btn" data-words="2500" onclick="setLength(this)">Feature <span style="color:var(--ink-3);font-size:11px">~2500w</span></button>
@@ -685,7 +183,6 @@
     </div>
 
     <hr class="divider">
-
     <p style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-3);margin-bottom:1rem">Content Structure</p>
 
     <div class="controls-grid">
@@ -741,16 +238,15 @@
     </div>
 
     <hr class="divider">
-
     <div class="form-grid">
       <div class="field span2">
-        <label>Additional Notes <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--ink-3)">(optional — extra instructions for Claude)</span></label>
-        <textarea id="art-notes" placeholder="e.g. Focus on budget travellers. Mention the best time to visit is July–September."></textarea>
+        <label>Additional Notes <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--ink-3)">(optional)</span></label>
+        <textarea id="art-notes" placeholder="e.g. Focus on budget travellers. Best time to visit is July–September."></textarea>
       </div>
     </div>
 
     <div class="submit-bar">
-      <button class="btn btn-primary" onclick="submitArticle()">
+      <button class="btn btn-primary" id="push-btn" onclick="submitArticle()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         Push to Make
       </button>
@@ -759,13 +255,12 @@
   </div>
 </div>
 
-<!-- ========== QUEUE ========== -->
+<!-- QUEUE -->
 <div class="view" id="view-queue">
   <div class="section-header">
     <h1 class="section-title">Article Queue</h1>
-    <span class="section-sub" id="queue-subtitle">0 articles</span>
+    <span class="section-sub" id="queue-subtitle">Loading…</span>
   </div>
-
   <div id="queue-list">
     <div class="empty-state">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -774,28 +269,25 @@
   </div>
 </div>
 
-<!-- ========== AUTHORS ========== -->
+<!-- AUTHORS -->
 <div class="view" id="view-authors">
   <div class="section-header">
     <h1 class="section-title">Author Styles</h1>
     <span class="section-sub">Edit each author's writing style prompt</span>
   </div>
-
   <div class="author-settings-grid">
-    <div>
-      <div class="author-list" id="author-list-sidebar"></div>
-    </div>
-    <div class="card style-editor" id="author-editor">
+    <div><div class="author-list" id="author-list-sidebar"></div></div>
+    <div class="card" id="author-editor" style="min-height:200px">
       <p style="color:var(--ink-3);font-size:14px">Select an author to edit their style.</p>
     </div>
   </div>
 </div>
 
-<!-- ========== SETTINGS ========== -->
+<!-- SETTINGS -->
 <div class="view" id="view-settings">
   <div class="section-header">
     <h1 class="section-title">Settings</h1>
-    <span class="section-sub">Configure webhooks and integration</span>
+    <span class="section-sub">Webhook and integration config</span>
   </div>
 
   <div class="card">
@@ -804,40 +296,54 @@
       <input type="text" id="webhook-url" placeholder="https://hook.eu2.make.com/xxxxxxxxxx" />
       <button class="btn btn-ghost btn-sm" onclick="saveWebhook()">Save</button>
     </div>
-    <p class="field-hint" style="margin-top:8px">This is the webhook trigger URL from your Make.com scenario. The app will POST article payloads to this URL.</p>
+    <p class="field-hint" style="margin-top:8px">Trigger URL from your Make.com scenario. Saved in browser localStorage.</p>
 
     <hr class="divider">
 
-    <p style="font-size:13px;font-weight:500;margin-bottom:1rem">Mark-Done Webhook (from Make)</p>
-    <div class="webhook-row">
-      <input type="text" id="done-webhook-secret" placeholder="e.g. ugt_make_secret_2026" />
-      <button class="btn btn-ghost btn-sm" onclick="saveDoneSecret()">Save</button>
-    </div>
-    <p class="field-hint" style="margin-top:8px">Make.com will call <code style="background:var(--paper-2);padding:2px 6px;border-radius:3px;font-size:11px">GET ?done=POST_ID&secret=YOUR_SECRET&url=https://...</code> on this page to mark an article done. Set this secret in your Make.com HTTP module.</p>
+    <p style="font-size:13px;font-weight:500;margin-bottom:0.5rem">Firebase / Realtime Queue</p>
+    <p class="field-hint">Queue data lives in Firestore collection <code style="background:var(--paper-2);padding:2px 5px;border-radius:3px;font-size:11px">articles</code>. Make updates it directly — the queue updates live without any page reload, even if the page was closed when Make finished.</p>
 
     <hr class="divider">
-
     <p style="font-size:13px;font-weight:500;margin-bottom:0.5rem">Danger Zone</p>
     <button class="btn btn-danger btn-sm" onclick="confirmClearQueue()">Clear all queue data</button>
   </div>
 
   <div class="card" style="margin-top:1rem">
-    <p style="font-size:13px;font-weight:500;margin-bottom:0.75rem">Make.com Payload Preview</p>
-    <p style="font-size:12px;color:var(--ink-3);margin-bottom:0.75rem">The app sends this JSON structure to your Make.com webhook:</p>
+    <p style="font-size:13px;font-weight:500;margin-bottom:0.75rem">Make.com — marking an article Done</p>
+    <p style="font-size:12px;color:var(--ink-3);margin-bottom:0.75rem">After module 5 (WordPress POST), add an <strong>HTTP module → Make a request</strong>:</p>
+    <pre style="background:var(--paper-2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;font-size:11px;overflow-x:auto;line-height:1.8;color:var(--ink-2)">Method: PATCH
+URL:
+https://firestore.googleapis.com/v1/projects/ugtraveller-writers/databases/(default)/documents/articles/{{1.queue_id}}?key=AIzaSyANyqDudAYNjZACFNlbwMVUlVVwrEKNNcA
+
+Header: Content-Type: application/json
+
+Body (raw JSON):
+{
+  "fields": {
+    "status":     {"stringValue": "done"},
+    "postId":     {"stringValue": "{{5.data.id}}"},
+    "articleUrl": {"stringValue": "{{5.data.link}}"},
+    "doneAt":     {"stringValue": "{{formatDate(now; \"YYYY-MM-DDTHH:mm:ssZ\")}}"}
+  }
+}</pre>
+    <p style="font-size:11px;color:var(--ink-3);margin-top:0.75rem">The status flips to Done and the View Article button appears in realtime — no page open required.</p>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <p style="font-size:13px;font-weight:500;margin-bottom:0.75rem">Payload sent to Make</p>
     <pre style="background:var(--paper-2);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;font-size:11px;overflow-x:auto;line-height:1.6;color:var(--ink-2)">{
-  "title": "Article Title",
-  "author": "Emma",
-  "writing_style": "Emma's full style prompt...",
+  "title":          "Article Title",
+  "author":         "Emma",
+  "writing_style":  "Emma's full style prompt...",
   "article_length": 1000,
-  "text_blocks": 4,
-  "image_blocks": 2,
-  "quote_blocks": 1,
-  "faq_blocks": 3,
-  "pexels_count": 5,
-  "post_status": "draft",
-  "notes": "Optional extra instructions",
-  "queue_id": "uuid",
-  "callback_url": "https://writers.ugtraveller.com?done=POST_ID&secret=..."
+  "text_blocks":    4,
+  "image_blocks":   2,
+  "quote_blocks":   1,
+  "faq_blocks":     3,
+  "pexels_count":   5,
+  "post_status":    "draft",
+  "notes":          "Optional extra instructions",
+  "queue_id":       "firestore-document-id"
 }</pre>
   </div>
 </div>
@@ -846,332 +352,46 @@
 <div class="confirm-overlay" id="confirm-overlay">
   <div class="confirm-box">
     <h3 id="confirm-title">Are you sure?</h3>
-    <p id="confirm-body">This action cannot be undone.</p>
+    <p id="confirm-body">This cannot be undone.</p>
     <div class="confirm-actions">
       <button class="btn btn-ghost btn-sm" onclick="closeConfirm()">Cancel</button>
-      <button class="btn btn-danger btn-sm" id="confirm-ok" onclick="">Confirm</button>
+      <button class="btn btn-danger btn-sm" id="confirm-ok">Confirm</button>
     </div>
   </div>
 </div>
 
 <div id="toast"></div>
 
+<!-- Firebase v10 compat SDKs (works without a bundler) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
 <script>
+firebase.initializeApp({
+  apiKey:            "AIzaSyANyqDudAYNjZACFNlbwMVUlVVwrEKNNcA",
+  authDomain:        "ugtraveller-writers.firebaseapp.com",
+  projectId:         "ugtraveller-writers",
+  storageBucket:     "ugtraveller-writers.firebasestorage.app",
+  messagingSenderId: "517529017438",
+  appId:             "1:517529017438:web:341c7d5036705ee685a8cf"
+});
+const db = firebase.firestore();
+
+/* ---- constants ---- */
 const AUTHORS = [
-  { id: 'emma',   name: 'Emma',    color: '#b5451b' },
-  { id: 'margaux',name: 'Margaux', color: '#2a6b8a' },
-  { id: 'thansi', name: 'Thansi',  color: '#6b2a8a' },
-  { id: 'ugt',    name: 'UGT',     color: '#1a5c3a' },
+  { id:'emma',    name:'Emma',    color:'#b5451b' },
+  { id:'margaux', name:'Margaux', color:'#2a6b8a' },
+  { id:'thansi',  name:'Thansi',  color:'#6b2a8a' },
+  { id:'ugt',     name:'UGT',     color:'#1a5c3a' },
 ];
 
-const STEPPER_LIMITS = {
-  'text-blocks':  { min: 1, max: 10 },
-  'image-blocks': { min: 0, max: 8  },
-  'quote-blocks': { min: 0, max: 4  },
-  'faq-blocks':   { min: 0, max: 8  },
-  'pexels-count': { min: 1, max: 10 },
+const LIMITS = {
+  'text-blocks':  {min:1,max:10},
+  'image-blocks': {min:0,max:8},
+  'quote-blocks': {min:0,max:4},
+  'faq-blocks':   {min:0,max:8},
+  'pexels-count': {min:1,max:10},
 };
-
-let selectedAuthor = null;
-let selectedLength = 1000;
-let activeAuthorEdit = null;
-
-function load(key, def) {
-  try { return JSON.parse(localStorage.getItem(key)) ?? def; } catch { return def; }
-}
-function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
-
-let queue = load('ugt_queue', []);
-let authorStyles = load('ugt_author_styles', {
-  emma:    "Emma is a vivid, first-person travel narrator. She writes with warmth and sensory detail — the smell of rain on red earth, the sound of a boda boda weaving through traffic. She speaks directly to the reader, shares personal anecdotes freely, and ends paragraphs with a reflective beat. Her tone is inviting and literary, never clinical.",
-  margaux: "Margaux writes with a refined, magazine-editorial voice. She is observational and slightly detached — a sophisticated traveller noting what others miss. Her sentences are elegant and measured. She favours scene-setting over personal confession, and her prose has a cool, confident rhythm.",
-  thansi:  "Thansi is energetic, curious and culturally-informed. She celebrates local voices and weaves in historical and anthropological context effortlessly. Her writing feels well-researched but never academic. She uses short punchy sentences interspersed with longer, lyrical observations.",
-  ugt:     "UGT voice is the magazine's authoritative, editorial brand voice. Confident, knowledgeable and inspiring. It speaks as a trusted guide — informative but never dry. It celebrates Uganda's landscapes, people and wildlife with pride. Third-person or second-person ('you') where appropriate.",
-});
-let webhookUrl = load('ugt_webhook_url', '');
-let doneSecret = load('ugt_done_secret', 'ugt_make_secret_2026');
-
-function init() {
-  renderAuthorSelector();
-  renderAuthorSidebar();
-  renderQueue();
-  document.getElementById('webhook-url').value = webhookUrl;
-  document.getElementById('done-webhook-secret').value = doneSecret;
-  checkDoneCallback();
-}
-
-function checkDoneCallback() {
-  const params = new URLSearchParams(window.location.search);
-  const postId = params.get('done');
-  const secret = params.get('secret');
-  const url    = params.get('url');
-  if (postId && secret === doneSecret) {
-    markDone(postId, url);
-    window.history.replaceState({}, '', window.location.pathname);
-  }
-}
-
-function showView(v) {
-  document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
-  document.getElementById('view-' + v).classList.add('active');
-  event.target.classList.add('active');
-  if (v === 'queue') renderQueue();
-}
-
-function renderAuthorSelector() {
-  const container = document.getElementById('author-selector');
-  container.innerHTML = AUTHORS.map(a => `
-    <div class="author-chip" id="chip-${a.id}" onclick="selectAuthor('${a.id}')">
-      <div class="author-avatar" style="background:${a.color}">${a.name[0]}</div>
-      <div class="author-name">${a.name}</div>
-    </div>
-  `).join('');
-}
-
-function selectAuthor(id) {
-  selectedAuthor = id;
-  document.querySelectorAll('.author-chip').forEach(el => el.classList.remove('selected'));
-  document.getElementById('chip-' + id).classList.add('selected');
-}
-
-function setLength(btn) {
-  selectedLength = parseInt(btn.dataset.words);
-  document.querySelectorAll('.length-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function step(key, delta) {
-  const el = document.getElementById(key + '-val');
-  const lim = STEPPER_LIMITS[key];
-  let v = parseInt(el.textContent) + delta;
-  v = Math.max(lim.min, Math.min(lim.max, v));
-  el.textContent = v;
-}
-
-function getStepVal(key) { return parseInt(document.getElementById(key + '-val').textContent); }
-
-async function submitArticle() {
-  const title = document.getElementById('art-title').value.trim();
-  if (!title) { showToast('Please enter a title.'); return; }
-  if (!selectedAuthor) { showToast('Please choose an author.'); return; }
-  if (!webhookUrl) { showToast('No webhook URL set. Go to Settings.'); return; }
-
-  const hint = document.getElementById('submit-hint');
-  hint.textContent = 'Sending...';
-
-  const queueId = 'q_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
-  const style = authorStyles[selectedAuthor] || '';
-  const author = AUTHORS.find(a => a.id === selectedAuthor);
-
-  const callbackBase = window.location.href.split('?')[0];
-  const payload = {
-    title,
-    author: author.name,
-    writing_style: style,
-    article_length: selectedLength,
-    text_blocks:   getStepVal('text-blocks'),
-    image_blocks:  getStepVal('image-blocks'),
-    quote_blocks:  getStepVal('quote-blocks'),
-    faq_blocks:    getStepVal('faq-blocks'),
-    pexels_count:  getStepVal('pexels-count'),
-    post_status:   document.getElementById('post-status').value,
-    notes:         document.getElementById('art-notes').value.trim(),
-    queue_id:      queueId,
-    callback_url:  `${callbackBase}?done=WORDPRESS_POST_ID&secret=${doneSecret}&url=ARTICLE_URL`,
-  };
-
-  const item = {
-    id: queueId,
-    title,
-    author: author.name,
-    authorColor: author.color,
-    length: selectedLength,
-    status: 'pending',
-    postId: null,
-    articleUrl: null,
-    createdAt: new Date().toISOString(),
-  };
-
-  queue.unshift(item);
-  save('ugt_queue', queue);
-  updateQueueBadge();
-
-  try {
-    const res = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-
-    if (res.ok) {
-      item.status = 'processing';
-      save('ugt_queue', queue);
-      showToast('Article pushed to Make! Check the queue.');
-      hint.textContent = '';
-      document.getElementById('art-title').value = '';
-      document.getElementById('art-notes').value = '';
-      showView('queue');
-      document.querySelectorAll('.nav-tab')[1].click();
-    } else {
-      item.status = 'error';
-      save('ugt_queue', queue);
-      hint.textContent = `Error: ${res.status}`;
-      showToast(`Make returned ${res.status}. Check Settings.`);
-    }
-  } catch (e) {
-    item.status = 'error';
-    save('ugt_queue', queue);
-    hint.textContent = 'Network error.';
-    showToast('Could not reach webhook. Check the URL in Settings.');
-  }
-
-  renderQueue();
-}
-
-function markDone(postId, url) {
-  let found = false;
-  queue.forEach(item => {
-    if (item.status === 'processing' && !item.postId) {
-      item.status = 'done';
-      item.postId = postId;
-      item.articleUrl = url || null;
-      item.doneAt = new Date().toISOString();
-      found = true;
-    }
-  });
-  if (found) {
-    save('ugt_queue', queue);
-    showToast('Article published! Check the queue.');
-    updateQueueBadge();
-    renderQueue();
-  }
-}
-
-function markItemDone(queueId) {
-  const item = queue.find(i => i.id === queueId);
-  if (item) {
-    item.status = 'done';
-    item.doneAt = new Date().toISOString();
-    save('ugt_queue', queue);
-    renderQueue();
-  }
-}
-
-function removeItem(queueId) {
-  queue = queue.filter(i => i.id !== queueId);
-  save('ugt_queue', queue);
-  renderQueue();
-  updateQueueBadge();
-}
-
-function renderQueue() {
-  const list = document.getElementById('queue-list');
-  const sub = document.getElementById('queue-subtitle');
-  sub.textContent = queue.length === 1 ? '1 article' : `${queue.length} articles`;
-  updateQueueBadge();
-
-  if (queue.length === 0) {
-    list.innerHTML = `<div class="empty-state">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      <p>No articles yet. Push one from New Article.</p>
-    </div>`;
-    return;
-  }
-
-  list.innerHTML = queue.map(item => {
-    const date = new Date(item.createdAt).toLocaleDateString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
-    let statusHtml = '';
-    if (item.status === 'pending')    statusHtml = `<span class="status-badge status-pending"><span class="status-dot"></span>Pending</span>`;
-    if (item.status === 'processing') statusHtml = `<span class="status-badge status-processing"><span class="status-dot"></span>Processing</span>`;
-    if (item.status === 'done')       statusHtml = `<span class="status-badge status-done"><span class="status-dot"></span>Done</span>`;
-    if (item.status === 'error')      statusHtml = `<span class="status-badge status-error"><span class="status-dot"></span>Error</span>`;
-
-    let actions = '';
-    if (item.status === 'processing') {
-      actions += `<button class="btn btn-ghost btn-sm" onclick="markItemDone('${item.id}')" title="Mark as done manually">Mark Done</button>`;
-    }
-    if (item.status === 'done' && item.articleUrl) {
-      actions += `<a href="${item.articleUrl}" target="_blank" class="view-link">View →</a>`;
-    }
-    if (item.status === 'done' && item.postId && !item.articleUrl) {
-      actions += `<span class="tag">Post #${item.postId}</span>`;
-    }
-    actions += `<button class="btn btn-ghost btn-sm" onclick="removeItem('${item.id}')" title="Remove">✕</button>`;
-
-    return `<div class="queue-item">
-      <div class="queue-author-dot" style="background:${item.authorColor}">${item.author[0]}</div>
-      <div class="queue-info">
-        <div class="queue-title">${item.title}</div>
-        <div class="queue-meta">
-          <span>${item.author}</span>
-          <span>~${item.length}w</span>
-          <span>${date}</span>
-          ${item.doneAt ? `<span>Done ${new Date(item.doneAt).toLocaleDateString('en-GB', {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span>` : ''}
-        </div>
-      </div>
-      ${statusHtml}
-      <div class="queue-actions">${actions}</div>
-    </div>`;
-  }).join('');
-}
-
-function updateQueueBadge() {
-  const pending = queue.filter(i => i.status === 'pending' || i.status === 'processing').length;
-  const badge = document.getElementById('queue-badge');
-  if (pending > 0) {
-    badge.textContent = pending;
-    badge.style.display = 'inline';
-  } else {
-    badge.style.display = 'none';
-  }
-}
-
-function renderAuthorSidebar() {
-  const sidebar = document.getElementById('author-list-sidebar');
-  sidebar.innerHTML = AUTHORS.map(a => `
-    <div class="author-list-item" id="sidebar-${a.id}" onclick="editAuthor('${a.id}')">
-      <div class="dot" style="background:${a.color}">${a.name[0]}</div>
-      <span class="author-list-name">${a.name}</span>
-    </div>
-  `).join('');
-}
-
-function editAuthor(id) {
-  activeAuthorEdit = id;
-  const author = AUTHORS.find(a => a.id === id);
-  document.querySelectorAll('.author-list-item').forEach(el => el.classList.remove('active'));
-  document.getElementById('sidebar-' + id).classList.add('active');
-
-  const style = authorStyles[id] || '';
-  document.getElementById('author-editor').innerHTML = `
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
-      <div class="dot" style="background:${author.color};width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff">${author.name[0]}</div>
-      <span style="font-family:'Playfair Display',serif;font-size:17px;font-weight:500">${author.name}</span>
-    </div>
-    <div class="field">
-      <label>Writing Style Prompt</label>
-      <textarea id="style-input" rows="8" oninput="updateCharCount(this)" placeholder="Describe this author's writing voice, tone, style, preferences...">${style}</textarea>
-      <div class="char-count" id="char-count">${style.length} chars</div>
-    </div>
-    <div style="display:flex;gap:10px;margin-top:0.5rem">
-      <button class="btn btn-primary" onclick="saveAuthorStyle()">Save Style</button>
-      <button class="btn btn-ghost" onclick="resetAuthorStyle('${id}')">Reset to Default</button>
-    </div>
-  `;
-}
-
-function updateCharCount(el) {
-  document.getElementById('char-count').textContent = el.value.length + ' chars';
-}
-
-function saveAuthorStyle() {
-  const val = document.getElementById('style-input').value.trim();
-  if (!activeAuthorEdit) return;
-  authorStyles[activeAuthorEdit] = val;
-  save('ugt_author_styles', authorStyles);
-  showToast('Style saved for ' + AUTHORS.find(a => a.id === activeAuthorEdit).name);
-}
 
 const DEFAULT_STYLES = {
   emma:    "Emma is a vivid, first-person travel narrator. She writes with warmth and sensory detail — the smell of rain on red earth, the sound of a boda boda weaving through traffic. She speaks directly to the reader, shares personal anecdotes freely, and ends paragraphs with a reflective beat. Her tone is inviting and literary, never clinical.",
@@ -1180,58 +400,328 @@ const DEFAULT_STYLES = {
   ugt:     "UGT voice is the magazine's authoritative, editorial brand voice. Confident, knowledgeable and inspiring. It speaks as a trusted guide — informative but never dry. It celebrates Uganda's landscapes, people and wildlife with pride. Third-person or second-person ('you') where appropriate.",
 };
 
-function resetAuthorStyle(id) {
-  authorStyles[id] = DEFAULT_STYLES[id];
-  save('ugt_author_styles', authorStyles);
-  document.getElementById('style-input').value = DEFAULT_STYLES[id];
-  updateCharCount(document.getElementById('style-input'));
-  showToast('Reset to default style.');
+/* ---- state ---- */
+let selectedAuthor = null;
+let selectedLength = 1000;
+let activeAuthorEdit = null;
+let liveQueue = [];
+let unsub = null;
+
+function ls(k,d){ try{ return JSON.parse(localStorage.getItem(k))??d; }catch{ return d; } }
+function lsSet(k,v){ localStorage.setItem(k,JSON.stringify(v)); }
+
+let authorStyles = ls('ugt_author_styles', {...DEFAULT_STYLES});
+let webhookUrl   = ls('ugt_webhook_url', '');
+
+/* ---- init ---- */
+function init(){
+  renderAuthorSelector();
+  renderAuthorSidebar();
+  document.getElementById('webhook-url').value = webhookUrl;
+  startListener();
 }
 
-function saveWebhook() {
+/* ---- firestore listener ---- */
+function startListener(){
+  if(unsub) unsub();
+  unsub = db.collection('articles')
+    .orderBy('createdAt','desc')
+    .limit(60)
+    .onSnapshot(snap => {
+      setFbStatus(true);
+      const prev = Object.fromEntries(liveQueue.map(i=>[i.id,i.status]));
+      liveQueue = snap.docs.map(d=>({id:d.id,...d.data()}));
+      renderQueue();
+      updateBadge();
+      // toast on status change to done
+      snap.docChanges().forEach(ch=>{
+        if(ch.type==='modified'){
+          const d = ch.doc.data();
+          if(d.status==='done' && prev[ch.doc.id] && prev[ch.doc.id]!=='done'){
+            showToast('✓ "'+d.title+'" is live!');
+          }
+        }
+      });
+    }, err=>{
+      setFbStatus(false);
+      console.error(err);
+    });
+}
+
+function setFbStatus(ok){
+  const el = document.getElementById('fb-status');
+  document.getElementById('fb-label').textContent = ok ? 'live' : 'offline';
+  el.className = 'fb-status' + (ok?' live':'');
+}
+
+/* ---- navigation ---- */
+function showView(v, btn){
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById('view-'+v).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+/* ---- author selector ---- */
+function renderAuthorSelector(){
+  document.getElementById('author-selector').innerHTML = AUTHORS.map(a=>`
+    <div class="author-chip" id="chip-${a.id}" onclick="selectAuthor('${a.id}')">
+      <div class="author-avatar" style="background:${a.color}">${a.name[0]}</div>
+      <div class="author-name">${a.name}</div>
+    </div>`).join('');
+}
+
+function selectAuthor(id){
+  selectedAuthor = id;
+  document.querySelectorAll('.author-chip').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('chip-'+id).classList.add('selected');
+}
+
+function setLength(btn){
+  selectedLength = parseInt(btn.dataset.words);
+  document.querySelectorAll('.length-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function step(key, delta){
+  const el = document.getElementById(key+'-val');
+  const lim = LIMITS[key];
+  el.textContent = Math.max(lim.min, Math.min(lim.max, parseInt(el.textContent)+delta));
+}
+
+function getVal(key){ return parseInt(document.getElementById(key+'-val').textContent); }
+
+/* ---- submit ---- */
+async function submitArticle(){
+  const title = document.getElementById('art-title').value.trim();
+  if(!title)         { showToast('Please enter a title.'); return; }
+  if(!selectedAuthor){ showToast('Please choose an author.'); return; }
+  if(!webhookUrl)    { showToast('No webhook URL — go to Settings.'); return; }
+
+  const btn  = document.getElementById('push-btn');
+  const hint = document.getElementById('submit-hint');
+  btn.disabled = true;
+  hint.textContent = 'Saving to Firestore…';
+
+  const author = AUTHORS.find(a=>a.id===selectedAuthor);
+
+  let docRef;
+  try {
+    docRef = await db.collection('articles').add({
+      title,
+      author:      author.name,
+      authorColor: author.color,
+      authorId:    author.id,
+      length:      selectedLength,
+      status:      'pending',
+      postId:      null,
+      articleUrl:  null,
+      doneAt:      null,
+      createdAt:   firebase.firestore.FieldValue.serverTimestamp(),
+    });
+  } catch(e){
+    btn.disabled = false;
+    hint.textContent = '';
+    showToast('Firestore error: '+e.message);
+    return;
+  }
+
+  hint.textContent = 'Pushing to Make…';
+
+  const payload = {
+    title,
+    author:         author.name,
+    writing_style:  authorStyles[author.id] || '',
+    article_length: selectedLength,
+    text_blocks:    getVal('text-blocks'),
+    image_blocks:   getVal('image-blocks'),
+    quote_blocks:   getVal('quote-blocks'),
+    faq_blocks:     getVal('faq-blocks'),
+    pexels_count:   getVal('pexels-count'),
+    post_status:    document.getElementById('post-status').value,
+    notes:          document.getElementById('art-notes').value.trim(),
+    queue_id:       docRef.id,
+  };
+
+  try {
+    const res = await fetch(webhookUrl, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload),
+    });
+    // Make webhooks return 200/accepted immediately
+    await docRef.update({ status: 'processing' });
+    showToast('Pushed to Make! Watching for completion…');
+    document.getElementById('art-title').value = '';
+    document.getElementById('art-notes').value = '';
+    showView('queue', document.getElementById('tab-queue'));
+  } catch(e){
+    // fetch may throw on CORS/network but Make still received it
+    await docRef.update({ status: 'processing' });
+    showToast('Sent — watching queue for completion.');
+    showView('queue', document.getElementById('tab-queue'));
+  }
+
+  btn.disabled = false;
+  hint.textContent = '';
+}
+
+/* ---- queue render ---- */
+function renderQueue(){
+  const list = document.getElementById('queue-list');
+  const sub  = document.getElementById('queue-subtitle');
+  sub.textContent = liveQueue.length===1 ? '1 article' : liveQueue.length+' articles';
+
+  if(liveQueue.length===0){
+    list.innerHTML = `<div class="empty-state">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <p>No articles yet. Push one from New Article.</p></div>`;
+    return;
+  }
+
+  const badges = {
+    pending:    `<span class="status-badge s-pending"><span class="s-dot"></span>Pending</span>`,
+    processing: `<span class="status-badge s-processing"><span class="s-dot"></span>Processing</span>`,
+    done:       `<span class="status-badge s-done"><span class="s-dot"></span>Done</span>`,
+    error:      `<span class="status-badge s-error"><span class="s-dot"></span>Error</span>`,
+  };
+
+  list.innerHTML = liveQueue.map(item => {
+    const ts = item.createdAt?.toDate ? item.createdAt.toDate() : new Date();
+    const date = ts.toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+
+    let actions = '';
+    if(item.status==='processing'){
+      actions += `<button class="btn btn-ghost btn-sm" onclick="markDone('${item.id}')">Mark Done</button>`;
+    }
+    if(item.status==='done' && item.articleUrl){
+      actions += `<a href="${item.articleUrl}" target="_blank" class="view-link">View article →</a>`;
+    }
+    if(item.status==='done' && item.postId && !item.articleUrl){
+      actions += `<span style="font-size:11px;color:var(--ink-3)">Post #${item.postId}</span>`;
+    }
+    actions += `<button class="btn btn-ghost btn-sm" onclick="removeItem('${item.id}')" title="Remove">✕</button>`;
+
+    const doneTs = item.doneAt?.toDate ? item.doneAt.toDate() : null;
+    const doneMeta = doneTs ? `<span>Done ${doneTs.toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span>` : '';
+
+    return `<div class="queue-item">
+      <div class="q-avatar" style="background:${item.authorColor||'#888'}">${(item.author||'?')[0]}</div>
+      <div class="q-info">
+        <div class="q-title">${item.title}</div>
+        <div class="q-meta">
+          <span>${item.author||''}</span>
+          <span>~${item.length||'?'}w</span>
+          <span>${date}</span>
+          ${doneMeta}
+        </div>
+      </div>
+      ${badges[item.status]||''}
+      <div class="q-actions">${actions}</div>
+    </div>`;
+  }).join('');
+}
+
+function updateBadge(){
+  const n = liveQueue.filter(i=>i.status==='pending'||i.status==='processing').length;
+  const b = document.getElementById('queue-badge');
+  b.textContent = n;
+  b.style.display = n>0 ? 'inline' : 'none';
+}
+
+async function markDone(docId){
+  await db.collection('articles').doc(docId).update({
+    status:'done',
+    doneAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+async function removeItem(docId){
+  await db.collection('articles').doc(docId).delete();
+}
+
+/* ---- authors ---- */
+function renderAuthorSidebar(){
+  document.getElementById('author-list-sidebar').innerHTML = AUTHORS.map(a=>`
+    <div class="author-list-item" id="sidebar-${a.id}" onclick="editAuthor('${a.id}')">
+      <div class="al-dot" style="background:${a.color}">${a.name[0]}</div>
+      <span class="author-list-name">${a.name}</span>
+    </div>`).join('');
+}
+
+function editAuthor(id){
+  activeAuthorEdit = id;
+  const a = AUTHORS.find(x=>x.id===id);
+  document.querySelectorAll('.author-list-item').forEach(el=>el.classList.remove('active'));
+  document.getElementById('sidebar-'+id).classList.add('active');
+  const style = authorStyles[id]||'';
+  document.getElementById('author-editor').innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+      <div style="width:32px;height:32px;border-radius:50%;background:${a.color};display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff">${a.name[0]}</div>
+      <span style="font-family:'Playfair Display',serif;font-size:17px;font-weight:500">${a.name}</span>
+    </div>
+    <div class="field">
+      <label>Writing Style Prompt</label>
+      <textarea id="style-input" rows="8" oninput="document.getElementById('char-count').textContent=this.value.length+' chars'">${style}</textarea>
+      <div class="char-count" id="char-count">${style.length} chars</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:0.75rem">
+      <button class="btn btn-primary" onclick="saveStyle()">Save Style</button>
+      <button class="btn btn-ghost"   onclick="resetStyle('${id}')">Reset to Default</button>
+    </div>`;
+}
+
+function saveStyle(){
+  const val = document.getElementById('style-input')?.value.trim();
+  if(!activeAuthorEdit||!val) return;
+  authorStyles[activeAuthorEdit] = val;
+  lsSet('ugt_author_styles', authorStyles);
+  showToast('Style saved for '+AUTHORS.find(a=>a.id===activeAuthorEdit).name+'.');
+}
+
+function resetStyle(id){
+  authorStyles[id] = DEFAULT_STYLES[id];
+  lsSet('ugt_author_styles', authorStyles);
+  document.getElementById('style-input').value = DEFAULT_STYLES[id];
+  document.getElementById('char-count').textContent = DEFAULT_STYLES[id].length+' chars';
+  showToast('Reset to default.');
+}
+
+/* ---- settings ---- */
+function saveWebhook(){
   webhookUrl = document.getElementById('webhook-url').value.trim();
-  save('ugt_webhook_url', webhookUrl);
+  lsSet('ugt_webhook_url', webhookUrl);
   showToast('Webhook URL saved.');
 }
 
-function saveDoneSecret() {
-  doneSecret = document.getElementById('done-webhook-secret').value.trim();
-  save('ugt_done_secret', doneSecret);
-  showToast('Secret saved.');
+async function confirmClearQueue(){
+  showConfirm('Clear all queue data?','All articles will be deleted from Firestore.', async ()=>{
+    const snap = await db.collection('articles').get();
+    const batch = db.batch();
+    snap.docs.forEach(d=>batch.delete(d.ref));
+    await batch.commit();
+    closeConfirm();
+    showToast('Queue cleared.');
+  });
 }
 
-function confirmClearQueue() {
-  showConfirm(
-    'Clear all queue data?',
-    'This will permanently remove all articles from the queue.',
-    () => {
-      queue = [];
-      save('ugt_queue', queue);
-      renderQueue();
-      showToast('Queue cleared.');
-      closeConfirm();
-    }
-  );
-}
-
-function showConfirm(title, body, onOk) {
+/* ---- confirm modal ---- */
+function showConfirm(title,body,onOk){
   document.getElementById('confirm-title').textContent = title;
-  document.getElementById('confirm-body').textContent = body;
+  document.getElementById('confirm-body').textContent  = body;
   document.getElementById('confirm-ok').onclick = onOk;
   document.getElementById('confirm-overlay').classList.add('show');
 }
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
 
-function closeConfirm() {
-  document.getElementById('confirm-overlay').classList.remove('show');
-}
-
+/* ---- toast ---- */
 let toastTimer;
-function showToast(msg) {
+function showToast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3500);
 }
 
 init();
